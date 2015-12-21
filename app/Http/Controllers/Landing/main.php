@@ -17,8 +17,13 @@ class Landing extends Controller
     }
 
     //
-    public function index()
+    public function index($landing="",$name="")
     {
+
+print_r([
+    '$landing'=>$landing,
+    '$name'=>$name
+]);
 dd(__FILE__.':'.__LINE__);
     }
 }

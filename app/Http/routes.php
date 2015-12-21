@@ -13,10 +13,7 @@
 
 Route::get('/','Home\Main@index');
 
-Route::get('/{landing?}/{name?}', function ($landing="", $name="") {
-    dd(__FILE__.':'.__LINE__);
-    return Landing::index();
-})->where(['landing'=>'[A-Za-z]+', 'name'=>'[A-Za-z]+']);
+Route::get('/{landing?}/{name?}', 'Landing\Landing@index')->where(['landing'=>'[A-Za-z]+', 'name'=>'[A-Za-z]+']);
 
 /**
 //  https://ajgallego.gitbooks.io/laravel-5/content/capitulo_2_rutas_avanzadas.html
