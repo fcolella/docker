@@ -1,0 +1,796 @@
+.icon-arrow-left-thin:before{content:"\e806";position:absolute;top:22px;left:22px;}.icon-arrow-right-thin:before{content:"\e807";position:absolute;top:22px;left:22px;}.icon-star:before{content:"\e808"}
+
+.img-modulo .icon-tipo{width:40px;height:40px;text-align:center;background:#3f67c0;color:#fff;font-size:1.6em;line-height:40px;position:absolute;z-index:300;top:inherit;left:inherit;}.img-modulo .icon-tipo.top{top:0;}.img-modulo .icon-tipo.left{left:0;}.img-modulo .icon-tipo.bottom{bottom:5px;}.img-modulo .icon-tipo.right-1{right:140px;}.img-modulo .icon-tipo.right-2{right:95px;}.img-modulo .icon-tipo.right-3{right:50px;}.img-modulo .icon-tipo.right-4{right:5px;}.ribbon-diag .text{line-height: 24px;}.diseno1 .title-top{color: #fff;left: 50px;position: absolute;top: 12px;z-index: 500;}.jRating{position:absolute !important;top:7px !important;left:45px !important;z-index: 10 !important}.jRating .jRatingColor{background: transparent url('/nuevo/img/icons/star-yellow.png') repeat;background-position: 0 -21px;}.main-footer{background: url(./../images/bg/bg-footer.png) no-repeat 50% 30px;}
+.icons-wrap{position: absolute;bottom: 5px; right: 5px}.icons-wrap>.icon-tipo{position: relative;margin-left: 5px;}
+.busqueda{
+    display: inline-block;
+    width: 100%;
+    color: #000;
+}
+.busqueda h2{
+    font-size: 18px;
+    margin: 0px 0 10px;
+    color: white;
+    font-weight: bold;
+}
+.busqueda input{
+    font-size: 12px;
+    float: left;
+    width: 100%;
+    padding: 5px;
+    /* font-size: 14px; */
+    border-radius: 4px;
+    padding-bottom: 7px;
+    padding-left: 5px;
+    padding-right: 2px;
+    padding-top: 10px;
+    border: 1px solid #CCCCCC;
+}
+.busqueda label{
+    font-size: 12px;
+    float: left;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    padding-left: 0;
+    color: #fff;
+}
+
+.busqueda button{
+    display:none;
+}
+
+.busqueda .fecha_desde{
+    clear: both;
+}
+.busqueda .fecha_desde,
+.busqueda .fecha_hasta{
+
+}
+.busqueda .grid_1,
+.busqueda .grid_2,
+.busqueda .grid_4,
+.busqueda .grid_5{
+    float: left;
+}
+.busqueda .grid_1{
+    width: 90px;
+}
+.busqueda .grid_2{
+    width: 220px;
+}
+.busqueda .grid_4{
+    width: 350px;
+}
+.busqueda .grid_5{
+    width: 440px;
+}
+.busqueda .clear{
+    display: none;
+}
+.busqueda .cant-noches{
+    display: none;
+}
+.busqueda select{
+    color: #000;
+    border: 1px solid #cccccc;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: normal;
+    height: 35px;
+    line-height: -18px;
+    margin-left: 7px;
+    margin: 0;
+    border-radius: 5px;
+    float: left;
+    padding:0;
+    padding-left: 3px;
+    width: 100%;
+}
+.busqueda input[type=checkbox]{
+    width: 13px;
+}
+.busqueda label[for="noDateCheck"]{
+    font-size: 10px;
+    width: 92%;
+    padding: 5px;
+}
+.busqueda .rooms,
+.busqueda .paxsQty{
+    clear: both;
+}
+.busqueda .reservar_btn{
+    line-height: 35px;
+    font-size: 14px;
+    color: #FFFFFF;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #0793D2;
+    border: none;
+    padding: 0;
+    background-color: #ff5400;
+    border-color: #ff5400;
+    /*position: absolute;
+    bottom: 7px;
+    right: 7px;
+    margin-top: 10px;*/
+    float: right;
+    margin-top: 30px;
+}
+.busqueda .container_hijos{
+    width: 80px;
+}
+.busqueda input[type="radio"]{
+    width: 13px;
+}
+.nav-tabs>li{
+    width: 80px;
+    height: 42px;
+    margin-bottom: -4px;
+}
+.widget-busqueda-wrap .nav-tabs>li>a{
+    padding: 10px 0 6px 0;
+    text-align: center;
+}
+.busqueda .clonable {
+    padding: 0;
+    margin: 0;
+    line-height: 7px;
+    list-style-type: none;
+}
+.busqueda .edades_conf{
+    padding: 0;
+    margin: auto 15px;
+    line-height: 7px;
+    list-style-type: none;
+}
+#form-seguros .packEdades{
+    margin-left: 20px;
+}
+.busqueda .selectEdades{
+    margin: auto 7px 7px 0;
+}
+.busqueda .edad_wrap{
+    float: right;
+    clear: right;
+}
+.busqueda .roomNumber,
+.busqueda .title{
+    text-align: center;
+    margin-top: 34px;
+}
+#form-paquetes .habitacion{
+    margin-left: 90px;
+}
+#form-paquetes .habitacion.first{
+    margin-left: 0;
+}
+
+.slider-pastillas .owl-next, .slider-producto .owl-next{
+    right: 12px;
+}
+.busqueda label[for*="oneway-"]{
+    margin: 1px; 
+    width: auto; 
+    cursor: pointer;
+}
+
+.owl-item .img-modulo .transparency{
+    position: absolute;
+        bottom: 5px;
+        right: 5px;
+        z-index: 600;
+        color: white;
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+        background: rgba(16, 18, 37, .8);
+        padding: 10px;
+        border-radius: 5px;
+}
+
+
+
+@media(max-width: 783px){
+    .busqueda .grid_1{
+        width: 100%;
+    }
+    .busqueda .grid_2{
+        width: 50%;
+    }
+    .busqueda .grid_4{
+        width: 100%;
+    }
+    .busqueda .grid_5{
+        width: 100%;
+    }
+    .nav-tabs>li{
+        width: 18%;
+    }
+    .habitacion .roomNumber,
+    .habitacion dl,
+    .habitacion .title{
+        margin: 0
+    }
+    .busqueda .reservar_btn{
+        float: right;
+        position: relative;
+        margin-right: -7px;
+    }
+    .busqueda label[for="noDateCheck"]{
+        font-size: 8px;
+        width: 90%;
+    }
+    #form-aereos .grid_2{
+        width: 100%;
+    }
+    #form-aereos .grid_1{
+        width: 50%;
+    }
+    .busqueda label[for*="oneway-"]{
+        line-height: 10px;
+    }
+}
+
+
+@media(min-width: 768px){       /*784*/
+    .busqueda .grid_1{
+        width: 166px;
+    }
+    .busqueda .grid_2{
+        width: 50%;
+    }
+    .busqueda .grid_4{
+        width: 515px;
+    }
+    .busqueda .grid_5{
+        width: 100%;
+    }
+    .nav-tabs>li{
+        width: 120px;
+    }
+    .widget-busqueda-wrap .nav-tabs>li{
+        width: 120px;
+        height: 40px;
+    }
+    .widget-busqueda-wrap .nav-tabs>li>a{
+        font-size: 14px;
+    }
+}
+
+@media(min-width: 1024px){
+    .busqueda .grid_1{
+        width: 80px;
+        margin: auto 3px;
+    }
+    .busqueda .grid_2{
+        width: 50%;
+    }
+    .busqueda .grid_4{
+        width: 80%;
+    }
+    .busqueda .grid_5{
+        width: 100%;
+    }
+    .nav-tabs>li{
+        width: 85px;
+    }
+    .widget-busqueda-wrap .nav-tabs>li{
+        width: 80px;
+        height: 42px;
+    }
+    .widget-busqueda-wrap .nav-tabs>li>a{
+        font-size: 16px;
+        padding: 10px 0 6px 0;
+    }
+    .busqueda .grid_2 .col-md-10,
+    .busqueda .grid_2 .col-md-12{
+        width: 98%;
+    }
+    .busqueda #periodoViaje{
+        clear: left;
+    }
+    #form-seguros{
+        min-height: 315px;  
+    }
+    .busqueda label[for*="oneway-"]{
+        padding-top: 2px;
+    }
+}
+
+
+
+
+
+
+/* COLORBOX */
+#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:9999;background-color: #fff;}
+#cboxOverlay{position:fixed; width:100%; height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
+#cboxContent{position:relative;}
+#cboxLoadedContent{overflow:auto}
+#cboxTitle{margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
+.cboxPhoto{float:left; margin:auto; border:0; display:block;}
+.cboxIframe{width:100%; height:100%; display:block; border:0;}
+/* 
+    User Style:
+    Change the following styles to modify the appearance of ColorBox.  They are
+    ordered & tabbed in a way that represents the nesting of the generated HTML.
+*/
+#cboxOverlay{opacity: .75;filter: alpha(opacity=75);-moz-opacity: 0.75;-khtml-opacity: 0.75;background: #000 repeat top left;z-index: 1000;}
+#colorbox{}
+    #cboxContent{/*margin-top:20px;*/border:7px solid #fff;-moz-box-shadow:3px 3px 2px rgba(35,31,42,0.48);-webkit-box-shadow:3px 3px 2px rgba(35,31,42,0.48);box-shadow:3px 3px 2px rgba(35,31,42,0.48);border-radius:5px}
+        #cboxError{padding:50px; border:1px solid #ccc;}
+        #cboxLoadedContent{/*border:7px solid #fff;*/ background:#FFFFFF}
+        #cboxTitle{display:none!important;position:absolute; top:-20px; left:0; color:#ccc;}
+        #cboxCurrent{position:absolute; top:-20px; right:0px; color:#ccc;display:none!important}
+        #cboxSlideshow{position:absolute; top:-20px; right:90px; color:#fff;}
+        /* BOTONES PREV-NEXT  */
+       
+        #cboxPrevious{position:absolute;top:98%;background:url(../css/img/prev.jpg) no-repeat;left:-7px;margin-top:-20px;width:31px;height:30px; text-indent:-9999px}
+        #cboxPrevious.hover{background:url(../css/img/prev_over.jpg) no-repeat;}
+        
+        #cboxNext{position:absolute;top:98%;right:-7px;background:url(../css/img/next.jpg) no-repeat;margin-top:-20px;width:31px;height:30px; text-indent:-9999px}
+        #cboxNext.hover{background:url(../css/img/next_over.jpg) no-repeat;}
+        
+        
+        
+        #cboxLoadingOverlay{background:#D1D3D4}
+        #cboxLoadingGraphic{background:url(../css/img/loading.gif) no-repeat center center;}
+        #cboxClose{position:absolute; top:-5px; right:-18px; display:block; width:31px; height:30px; text-indent:-9999px;    border: none;}
+        #cboxClose.hover{ background:url(../css/img/close-over.png)}
+        #cboxClose{background:url(../css/img/close.png) no-repeat};
+        
+        #cboxLoadedContent #modal-opciones{padding:20px 10px 10px;overflow:hidden}
+        #cboxLoadedContent a.round-btn{background-position:100% -110px}
+        #cboxLoadedContent a.round-btn span{background-position:-657px -110px}
+        
+
+
+
+.suggest-icons{
+    position: absolute;
+    top: 33px;
+    right: 1px;
+    width: 18px;
+    height: 30px;
+    display: inline-block;
+    color: black;
+    cursor: pointer;
+}
+.suggest-icons.grid{
+    right: 15px;
+}
+.suggest-icons:before{
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 5px solid black;
+    float: none;
+    margin: 4px auto 0;
+    display: block;
+}
+.suggest-icons.Mac:before{
+    content: " ";
+}
+.suggest-icons:after{
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 6px solid black;
+    content: " ";
+    float: none;
+    margin: 11px auto 4px;
+    display: block;
+}
+.suggest-icons.Mac:after{
+    border-top: 5px solid black;
+}
+.suggest-icons.reserva{
+    top: 0px;
+    right: -8px;
+    width: 30px;
+    height: 34px;
+}
+.suggest-icons.reserva:after{
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid black;
+    margin: 15px auto;
+}
+.select-autocomplete.disabled{
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+}
+.select-autocomplete-wrap table,
+.destinoWrap table{
+    width: 391px;
+    display: table;
+    background-color: white;
+    border: 1px solid #AAAAAA;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.35);
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.35);
+    border-radius: 5px;
+    z-index: 100;
+}
+.select-autocomplete-wrap table td,
+.destinoWrap table td,
+.ui-menu .ui-menu-item{
+    font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+    font-size: 14px;
+    padding-left: 5px;
+    line-height: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.select-autocomplete-wrap table td:hover,
+.select-autocomplete-wrap table td.selected,
+.destinoWrap table td:hover,
+.destinoWrap table td.selected,
+.ui-menu .ui-menu-item:hover{
+    background-color: #126799;
+    color: white;
+}
+#form-paquetes .destinoWrap{
+    position: relative;
+}
+.busqueda .formError,
+.busqueda .error{
+    color:red;
+    font-size: 11px;
+}
+
+textarea.error, input.error, select.error, .errorBorder {
+    border: 2px solid #D80A0A !important;
+    box-shadow: 0px 0px 3px #A85F45 !important;
+}
+#form-paquetes #origen.error{
+    color: black;
+    border: 2px solid #D80A0A !important;
+    box-shadow: 0px 0px 3px #A85F45 !important;
+}
+
+
+.main-content .region-link-wrap .region-link{
+    display: block;
+    position: relative;
+    width: 95%;
+    font-size: 18px;
+    color: #545454;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+}
+.main-content .region-link-wrap .region-link span{
+    position: absolute;
+    top: 19px;
+}
+.main-content .region-link-wrap .region-link.argentina span{
+    left: 58px;
+}
+.main-content .region-link-wrap .region-link.brasil span{
+    left: 67px;
+}
+.main-content .region-link-wrap .region-link.caribe span{
+    left: 80px;
+}
+.main-content .region-link-wrap .region-link.europa span{
+    left: 60px;
+}
+.main-content .region-link-wrap .region-link.sudamerica span{
+    left: 60px;
+}
+.main-content .region-link-wrap .region-link.exotico span{
+    left: 70px;
+}
+.main-content .region-link-wrap .region-link.cruceros span{
+    left: 70px;
+}
+.main-content .region-link-wrap .region-link.escapadas span{
+    left: 70px;
+}
+.main-content .region-link-wrap .region-link.eeuu span{
+    left: 60px;
+}
+.main-content .region-link-wrap .region-link.verano span{
+    left: 70px;
+}
+.main-content .region-link-wrap .region-link.escapada span{
+    left: 63px;
+}
+
+
+@media(max-width: 700px){
+    .main-content .region-link-wrap .region-link span{
+        position: absolute;
+        top: 9px;
+        font-size: 12px;
+    }
+    .main-content .region-link-wrap .region-link.argentina span{
+        left: 38px;
+    }
+    .main-content .region-link-wrap .region-link.brasil span{
+        left: 47px;
+    }
+    .main-content .region-link-wrap .region-link.caribe span{
+        left: 60px;
+    }
+    .main-content .region-link-wrap .region-link.europa span{
+        left: 40px;
+    }
+    .main-content .region-link-wrap .region-link.sudamerica span{
+        left: 40px;
+    }
+    .main-content .region-link-wrap .region-link.exotico span{
+        left: 50px;
+    }
+    .main-content .region-link-wrap .region-link.cruceros span{
+        left: 50px;
+    }
+    .main-content .region-link-wrap .region-link.escapadas span{
+        left: 50px;
+    }
+    .main-content .region-link-wrap .region-link.eeuu span{
+        left: 40px;
+    }
+    .main-content .region-link-wrap .region-link.verano span{
+        left: 50px;
+    }
+    .main-content .region-link-wrap .region-link.escapada span{
+        left: 43px;
+    }
+
+
+
+
+
+    .main-content .slider-cybermonday-regions.selected .region-link-wrap .region-link span{
+        position: absolute;
+        top: 23px;
+        font-size: 35px;
+    }
+    .main-content .slider-cybermonday-regions.selected .region-link-wrap .region-link.argentina span{
+        left: 88px;
+    }
+    .main-content .slider-cybermonday-regions.selected .region-link-wrap .region-link.brasil span{
+        left: 110px;
+    }
+    .main-content .slider-cybermonday-regions.selected .region-link-wrap .region-link.caribe span{
+        left: 120px;
+    }
+    .main-content .slider-cybermonday-regions.selected .region-link-wrap .region-link.europa span{
+        left: 110px;
+    }
+    .main-content .slider-cybermonday-regions.selected .region-link-wrap .region-link.sudamerica span{
+        left: 90px;
+    }
+    .main-content .slider-cybermonday-regions.selected .region-link-wrap .region-link.exotico span{
+        left: 110px;
+    }
+    .main-content .slider-cybermonday-regions.selected .region-link-wrap .region-link.cruceros span{
+        left: 100px;
+    }
+    .main-content .slider-cybermonday-regions.selected .region-link-wrap .region-link.escapadas span{
+        left: 100px;
+    }
+    .main-content .region-link-wrap .region-link.eeuu span{
+        left: 90px;
+    }
+    .main-content .region-link-wrap .region-link.verano span{
+        left: 100px;
+    }
+    .main-content .region-link-wrap .region-link.escapada span{
+        left: 93px;
+    }
+
+
+    .main-content .region-link-wrap .region-link.selected span{
+        font-size: 30px;
+        left: 78px;
+    }
+
+
+}
+
+
+
+.slider-cybermonday-regions .owl-controls .owl-nav [class*=owl-] {
+    background: 0 0;
+    color: #666;
+    font-size: 15px;
+    height: auto;
+    line-height: 0;
+    width: auto;
+    position: absolute;
+}
+.slider-cybermonday-regions .owl-prev{
+    top: -37px;
+    left: -20px;
+}
+.slider-cybermonday-regions .owl-next{
+    top: -37px;
+    right: 0;
+}
+
+@media (min-width: 1200px){
+    .slider-cybermonday-regions.selected .owl-controls {
+        width: 890px;
+    }
+}
+
+
+
+.main-content{
+    padding-top: 0;
+    margin-top: 3px;
+}
+.titulo-gral{
+    margin-left: -14px;
+}
+
+button[disabled], html input[disabled], select[disabled]{
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+}
+
+.formas-de-pago-wrap{
+    margin-bottom: 0px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+@media (min-width: 1200px) {
+    .condicion-cuotas {
+        line-height: 30px;
+    }
+}
+
+@media (min-width: 992px) {
+    .mas-medios-link a {
+        font-size: 12px;
+        line-height: 30px;
+    }
+}
+.slider-bancos{
+    position: relative;
+    z-index: 4;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(136,136,136,1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(136,136,136,1);
+    box-shadow: 0px 0px 10px 0px rgba(136,136,136,1);
+}
+.slider-pastillas .owl-stage-outer, .slider-producto .owl-stage-outer {
+    padding: 10px 5px;
+}
+#main-slider{
+    margin-bottom: 0;
+}
+.slider-buttons .owl-prev,
+.slider-buttons .owl-next{
+    position: absolute;
+    top: -99px;
+}
+.slider-buttons .owl-prev{left: 0;}
+.slider-buttons .owl-next{right: 39px;}
+.offer-landing .slider-buttons .owl-prev,
+.offer-landing .slider-buttons .owl-next{
+    top: -84px;
+}
+.offer-landing .slider-buttons .owl-next{right: 28%;}
+#slider-buttons .owl-nav{
+    opacity: 1;
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+}
+.ribbon-diag.black-friday,
+.ribbon-diag.black-friday::after,
+.ribbon-diag.black-friday::before,
+.ribbon-diag.black-friday .text::before,
+.ribbon-diag.black-friday .text::after{background: black;}
+
+
+
+
+
+
+/* cybermonday & hotsale */
+
+
+.main-content.hotsale{
+    background: url('/img/hotsale/hotsale_ok.jpg') no-repeat;
+    margin-top: 0;
+    height: 506px;
+}
+.main-content.cybermonday{
+    background: url('/img/cybermonday/cybermonday_ok.jpg') no-repeat;
+    margin-top: 0;
+    height: 506px;
+}
+
+form.variant{
+    float: right;
+    width: 510px;
+    background-color: rgba(0, 44, 93, 0.8);
+    color: white;
+    webkit-box-shadow: 0px 3px 1px 0px rgba(0,0,0,0.31);
+    -moz-box-shadow: 0px 3px 1px 0px rgba(0,0,0,0.31);
+    box-shadow: 0px 3px 1px 0px rgba(0,0,0,0.31);
+    padding: 35px;
+    margin-top: 30px;
+    margin-right: 35px;
+}
+form.variant .roboto{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+}
+form.variant .roboto.extra-small{
+    font-size: 12px;
+}
+form.variant .roboto.small{
+    font-size: 22px;
+}
+form.variant .roboto.large{
+    font-size: 30px;
+}
+form.variant .roboto.light{
+    font-weight: 300;
+    line-height: 35px;
+}
+form.variant .roboto.bold{
+    font-weight: 900;
+}
+form.variant .sep{
+    background-color: #0793D2;
+    height: 5px;
+    width: 50px;
+    margin: 10px 0 35px;
+}
+form.variant label{
+    color: white;
+    margin: 10px auto 0;
+}
+form.variant input{
+    color: black;
+}
+form.variant input.short{
+    width: 95%;
+}
+form.variant .submit-btn{
+    border: 1px solid #0793D2;
+    margin-top: 25px;
+    color: white;
+}
+form.variant .submit-btn:hover{
+    box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.2);
+    background-color: #00AFF1;
+}
+form.variant .msje-error{
+    color: red;
+}
+
+@media (max-width: 1200px) {
+    .main-content.hotsale,.main-content.cybermonday{
+        background: none;
+        padding: 0;
+    }
+    form.variant{
+        float: left;
+        width: 100%;
+        display: block;
+        margin: 0;
+    }
+    form.variant .grid_2,form.variant label, form.variant input{
+        width: 100% !important;
+    }
+
+
+
+}
