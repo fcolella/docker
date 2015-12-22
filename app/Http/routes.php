@@ -11,9 +11,19 @@
 |
 */
 
+
+Route::group(['prefix' => 'cms'], function()
+{
+    Route::get('/', 'Cms\Main@index');
+    Route::get('/home', 'Cms\Main@home');
+    Route::get('/flights', 'Cms\Main@flights');
+});
+
 Route::get('/','Home\Main@index');
 
 Route::get('/{landing?}/{name?}', 'Landing\Landing@index')->where(['landing'=>'[A-Za-z]+', 'name'=>'[A-Za-z]+']);
+
+
 
 /**
 //  https://ajgallego.gitbooks.io/laravel-5/content/capitulo_2_rutas_avanzadas.html
