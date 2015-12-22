@@ -7,14 +7,15 @@
  */
 namespace App\Http\Controllers\Cms;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
+use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
 
 class Main extends Controller
 {
     function index($params=[])
     {
+        //way of getting post vars
+//        $get = Request::query('name','lala'); dd($get);
         return view('cms/index');
         //$params = Route::current()->parameters();
         dd($params);
