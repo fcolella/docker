@@ -30,6 +30,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
+	//	print_r($e); die(__FILE__.':'.__LINE__);
         return parent::report($e);
     }
 

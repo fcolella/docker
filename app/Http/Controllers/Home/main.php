@@ -5,8 +5,7 @@ use App\Http\Controllers\Commons;
 use App\Http\Controllers\Offers\Offers;
 use App\Http\Controllers\Banks\Banks;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
+use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
 
 class Main extends Controller
@@ -19,6 +18,8 @@ class Main extends Controller
 	//
 	public function index()
 	{
+		//	way of getting post vars
+		//	$get = Request::query('name','lala'); dd($get);
 		return view(
 			'Home/index'
 		)

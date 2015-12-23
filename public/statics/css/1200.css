@@ -193,7 +193,7 @@
 /*
   Forces backgrounds to span full width,
   even if there is horizontal scrolling.
-  Increase this if your layout is wider.
+  Increase this if your layouts is wider.
 
   Note: IE6 works fine without this fix.
 */
