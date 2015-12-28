@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('statics/css/bootstrap/v3.3.6/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('statics/css/cms/stylesheet.css') }}" rel="stylesheet">
 
     <!-- Placed at the header of the document for compatibility -->
     <script src="{{ asset('statics/js/jquery/v1.11.3/jquery.min.js') }}"></script>
