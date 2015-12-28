@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Database;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Models\Region;
 
 class RegionController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +18,10 @@ class RegionController extends Controller
      */
     public function index()
     {
-        //
+		$regions = Region::all();
+
+		return 	view('cms/regions/all')
+				->with('regions', $regions);
     }
 
     /**

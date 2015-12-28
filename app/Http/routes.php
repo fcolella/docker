@@ -17,6 +17,7 @@ Route::group(['prefix' => 'cms'], function()
     Route::get('/', 'Cms\Main@index');
     Route::get('/home', 'Cms\Main@home');
     Route::get('/flights', 'Cms\Main@flights');
+    Route::get('/regions', 'Database\RegionController@index');
 });
 
 Route::get('/','Home\Main@index');

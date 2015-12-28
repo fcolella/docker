@@ -22,12 +22,12 @@ class Main extends Controller
 	//	$response = Gulliver::getCities();
 	//	$response = Gulliver::getCities('AR');
 	//	$response = Gulliver::getCities('AR','B');
-		$response = Gulliver::getCities('','',1333);
+	//	$response = Gulliver::getCities('','',1333);
 
 	//	$response = Gulliver::getFlightsOffers();
 	//	$response = Gulliver::getFlightsCalendars();
 	//	$response = Gulliver::getFlightsCalendars('2287');
-print_r('<pre>');print_r(Gulliver::$error);print_r("\n");print_r($response); print_r('</pre><br>'); die(__FILE__.':'.__LINE__);
+	//print_r('<pre>');print_r(Gulliver::$error);print_r("\n");print_r($response); print_r('</pre><br>'); die(__FILE__.':'.__LINE__);
 
 		//	way of getting post vars
 		//	$get = Request::query('name','lala'); dd($get);
