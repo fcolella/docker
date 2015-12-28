@@ -2,6 +2,7 @@
         <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
 			<li><a class="list-group-item" href="{{getenv("CMS_PATH")}}/regions">Regions</a></li>
+			<li><a class="list-group-item" href="{{getenv("CMS_PATH")}}/city">Cities</a></li>
             <li>
                 <a href="#sublist-1" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">Item 1 <i class="pull-right glyphicon glyphicon-chevron-down"></i></a>
                 <div class="collapse" id="sublist-1">

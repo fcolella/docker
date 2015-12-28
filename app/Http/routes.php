@@ -18,6 +18,11 @@ Route::group(['prefix' => 'cms'], function()
     Route::get('/home', 'Cms\Main@home');
     Route::get('/flights', 'Cms\Main@flights');
     Route::get('/regions', 'Database\RegionController@index');
+	Route::group(['prefix' => 'city'], function()
+	{
+		Route::get('/', 'Database\CityController@index');
+		Route::get('/fetch', 'Database\CityController@fetch');
+	});
 });
 
 Route::get('/','Home\Main@index');

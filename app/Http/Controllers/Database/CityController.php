@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Database;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Models\City;
+use App\Http\Controllers\Gulliver;
 
 class CityController extends Controller
 {
@@ -17,7 +19,31 @@ class CityController extends Controller
     public function index()
     {
         //
+		return view('cms/cities/index')->with('cities', City::all());
     }
+
+    public function fetch()
+    {
+		$cities = Gulliver::getCities();
+		if (true==Gulliver::$error) {
+			$status = 'danger';
+		} else {
+			foreach ($cities as $item) {
+				$city = City::where('id', $item['id'])->first();
+				if (null == $city) {
+					$city = new City;
+				}
+				$city->forceFill($item);
+				$city->save();
+			}
+			$status = 'success';
+		}
+		//
+		return view('cms/cities/fetch')->with([
+			'status' => $status,
+			'cities' => $cities
+		]);
+	}
 
     /**
      * Show the form for creating a new resource.
@@ -72,7 +98,7 @@ class CityController extends Controller
     public function update(Request $request, $id)
     {
         //
-    }
+	}
 
     /**
      * Remove the specified resource from storage.

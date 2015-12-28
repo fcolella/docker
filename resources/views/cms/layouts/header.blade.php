@@ -20,6 +20,9 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('statics/css/bootstrap/v3.3.6/dashboard.css') }}" rel="stylesheet">
 
+    <!-- Placed at the header of the document for compatibility -->
+    <script src="{{ asset('statics/js/jquery/v1.11.3/jquery.min.js') }}"></script>
+
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="{{ asset('statics/js/ie8-responsive-file-warning.js') }}"></script><![endif]-->
     <script src="{{ asset('statics/js/ie-emulation-modes-warning.js') }}"></script>
