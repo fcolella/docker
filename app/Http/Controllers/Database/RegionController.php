@@ -31,7 +31,7 @@ class RegionController extends Controller
      */
     public function create()
     {
-        //
+		return 	view('cms/regions/create');
     }
 
     /**
