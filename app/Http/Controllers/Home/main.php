@@ -19,7 +19,7 @@ class Main extends Controller
 	public function index()
 	{
 		//	way of getting post vars
-		//	$get = Request::query('name','lala'); dd($get);
+	//	Request::setMethod('POST'); $get = Request::query('name','lala'); dd($get);
 		return view(
 			'Home/index'
 		)
