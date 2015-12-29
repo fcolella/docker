@@ -17,7 +17,15 @@ Route::group(['prefix' => 'cms'], function()
     Route::get('/', 'Cms\Main@index');
     Route::get('/home', 'Cms\Main@home');
     Route::get('/flights', 'Cms\Main@flights');
-    Route::get('/regions', 'Database\RegionController@index');
+	Route::group(['prefix' => 'regions'], function()
+	{
+		Route::get('/', ['as' => 'regions.home', 'uses' => 'Database\RegionController@index']);
+		Route::get('/create', ['as' => 'regions.create', 'uses' => 'Database\RegionController@create']);
+		Route::post('/store', ['as' => 'regions.store', 'uses' => 'Database\RegionController@store']);
+		Route::get('/{id_region}/edit', ['as' => 'regions.edit', 'uses' => 'Database\RegionController@edit']);
+		Route::post('/{id_region}/update', ['as' => 'regions.update', 'uses' => 'Database\RegionController@update']);
+		Route::get('/{id_region}/destroy', ['as' => 'regions.delete', 'uses' => 'Database\RegionController@destroy']);
+	});
 	Route::group(['prefix' => 'city'], function()
 	{
 		Route::get('/', 'Database\CityController@index');

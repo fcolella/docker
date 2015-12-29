@@ -11,16 +11,5 @@
                     <a href="" class="list-group-item">Subitem 1.3</a>
                 </div>
             </li>
-            <li><a class="list-group-item" href="#">Reports</a></li>
-            <li><a class="list-group-item" href="#">Analytics</a></li>
-            <li><a class="list-group-item" href="#">Export</a></li>
-            <li><a class="list-group-item" href="">Nav item</a></li>
-            <li><a class="list-group-item" href="">Nav item again</a></li>
-            <li><a class="list-group-item" href="">One more nav</a></li>
-            <li><a class="list-group-item" href="">Another nav item</a></li>
-            <li><a class="list-group-item" href="">More navigation</a></li>
-            <li><a class="list-group-item" href="">Nav item again</a></li>
-            <li><a class="list-group-item" href="">One more nav</a></li>
-            <li><a class="list-group-item" href="">Another nav item</a></li>
         </ul>
     </div>
