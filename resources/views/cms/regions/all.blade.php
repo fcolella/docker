@@ -14,7 +14,7 @@
 			@endif
 
 			<a class="btn btn-small btn-success" href="{{ URL::to(getenv('CMS_PATH').'/regions/create') }}">Create</a>
-			<table>
+			<table class="table table-bordered" id="regions-list">
 				<thead>
 				<tr>
 					<td>ID</td>
@@ -29,8 +29,8 @@
 							<td>{{ $region->id }}</td>
 							<td>{{ $region->name }}</td>
 							<td>
-								@foreach($region->countries as $country)
-									{{ $country->name }}
+								@foreach($region->countries as $index => $country)
+									{{ $country->name }}@if($index < $region->countries->count() - 1), @endif
 								@endforeach
 							</td>
 							<td>
@@ -41,4 +41,9 @@
 					@endforeach
 				</tbody>
 			</table>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$('#regions-list').DataTable();
+				});
+			</script>
 @include('cms.layouts.footer')
