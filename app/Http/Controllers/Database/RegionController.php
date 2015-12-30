@@ -58,7 +58,7 @@ class RegionController extends Controller
 			$country->save();
 		}
 
-		return 	redirect()->route('regions.home')
+		return 	redirect()->route('regions.index')
 				->with('message_success', 'Region '.$region->name.' has been successfully created');
     }
 
@@ -132,7 +132,7 @@ class RegionController extends Controller
 			$country->save();
 		}
 
-		return 	redirect()->route('regions.home')
+		return 	redirect()->route('regions.index')
 			->with('message_update', 'Region '.$region->name.' has been successfully updated');
     }
 
@@ -154,7 +154,7 @@ class RegionController extends Controller
 			$country->save();
 		}
 
-		return 	redirect()->route('regions.home')
+		return 	redirect()->route('regions.index')
 			->with('message_delete', 'Region '.$region_name.' has been successfully deleted');
     }
 }

@@ -14,12 +14,12 @@
 
 Route::group(['prefix' => 'cms'], function()
 {
-    Route::get('/', 'Cms\Main@index');
-    Route::get('/home', 'Cms\Main@home');
-    Route::get('/flights', 'Cms\Main@flights');
+    Route::get('/', ['as' => 'cms.index', 'uses' => 'Cms\Main@index']);
+    Route::get('/home', ['as' => 'cms.home', 'uses' => 'Cms\Main@home']);
+    Route::get('/flights', ['as' => 'cms.flights', 'uses' => 'Cms\Main@flights']);
 	Route::group(['prefix' => 'regions'], function()
 	{
-		Route::get('/', ['as' => 'regions.home', 'uses' => 'Database\RegionController@index']);
+		Route::get('/', ['as' => 'regions.index', 'uses' => 'Database\RegionController@index']);
 		Route::get('/create', ['as' => 'regions.create', 'uses' => 'Database\RegionController@create']);
 		Route::post('/store', ['as' => 'regions.store', 'uses' => 'Database\RegionController@store']);
 		Route::get('/{id_region}/edit', ['as' => 'regions.edit', 'uses' => 'Database\RegionController@edit']);
@@ -28,8 +28,8 @@ Route::group(['prefix' => 'cms'], function()
 	});
 	Route::group(['prefix' => 'city'], function()
 	{
-		Route::get('/', 'Database\CityController@index');
-		Route::get('/fetch', 'Database\CityController@fetch');
+		Route::get('/', ['as' => 'cities.index', 'uses' => 'Database\CityController@index']);
+		Route::get('/fetch', ['as' => 'cities.fetch', 'uses' => 'Database\CityController@fetch']);
 	});
 });
 
