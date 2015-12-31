@@ -1,3 +1,12 @@
+.navbar-header{
+  margin-left: -15px !important;
+
+  .cms-navbar-logo{
+    float:left;
+    margin-right: 15px;
+  }
+}
+
 .sidebar{
   position: unset;
 }
@@ -37,9 +46,39 @@
 
     .table{
       width: 100% !important;
-      
+
       thead tr td{
         background-color: #edf5fc;
+      }
+    }
+
+    .form-group{
+      .country_item{
+        background-color: #edf5fc;
+        border-radius: 9px;
+        display: inline-block;
+        margin: 0 10px 10px 0;
+        padding: 10px 15px 5px;
+        cursor: pointer;
+
+        label, input{
+          cursor: pointer;
+        }
+      }
+    }
+
+    .regions-selected-countries{
+      display: block;
+
+      .regions-selected-country{
+        display: inline-block;
+        margin: 0 10px 10px 0;
+
+        span{
+          display: inline-block;
+          margin: 1px 0 0 5px;
+          vertical-align: text-top;
+        }
       }
     }
   }

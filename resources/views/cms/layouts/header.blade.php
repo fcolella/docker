@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="{{ asset('statics/cms/images/favicon.ico') }}" rel="shortcut icon">
     <title>Zeus CMS</title>
 
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{{ asset('statics/cms/css/bootstrap/3.3.6/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('statics/cms/css/datatables/datatables.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('statics/cms/css/dashboard.css') }}" rel="stylesheet">
 	<link href="{{ asset('statics/cms/css/cms.css') }}" rel="stylesheet">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="{{ asset('statics/cms/js/jquery/2.1.4/jquery.min.js') }}"></script>
+	<script src="{{ asset('statics/cms/js/bootstrap/3.3.6/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('statics/cms/js/datatables/datatables.min.js') }}"></script>
 </head>
 
 <body>

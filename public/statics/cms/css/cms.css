@@ -1,3 +1,12 @@
+.navbar-header {
+  margin-left: -15px !important;
+}
+
+.navbar-header .cms-navbar-logo {
+  float: left;
+  margin-right: 15px;
+}
+
 .sidebar {
   position: unset;
 }
@@ -45,4 +54,33 @@
 
 .main .cms-content .table thead tr td {
   background-color: #edf5fc;
+}
+
+.main .cms-content .form-group .country_item {
+  background-color: #edf5fc;
+  border-radius: 9px;
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  padding: 10px 15px 5px;
+  cursor: pointer;
+}
+
+.main .cms-content .form-group .country_item label,
+.main .cms-content .form-group .country_item input {
+  cursor: pointer;
+}
+
+.main .cms-content .regions-selected-countries {
+  display: block;
+}
+
+.main .cms-content .regions-selected-countries .regions-selected-country {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+}
+
+.main .cms-content .regions-selected-countries .regions-selected-country span {
+  display: inline-block;
+  margin: 1px 0 0 5px;
+  vertical-align: text-top;
 }

@@ -16,22 +16,30 @@
 	<div class="cms-content">
 		{!! Form::open(array('action' => 'Database\RegionController@store')) !!}
 
-		<div class="form-group">
-			{!! Form::label('name', 'Name') !!}
-			{!! Form::text('name', Input::old('name'), array('class' => 'form-control')) !!}
-		</div>
-
-		<div class="form-group">
-			@foreach($countries as $country)
-			<div class="country_item">
-				{!! Form::label('country_'.$country->code, $country->name) !!}
-				{!! Form::checkbox('countries[]', $country->code, null, ['class' => 'field', 'id' => 'country_'.$country->code]) !!}
+			<div class="form-group">
+				{!! Form::label('name', 'Name') !!}
+				{!! Form::text('name', Input::old('name'), array('class' => 'form-control')) !!}
 			</div>
-			@endforeach
-		</div>
 
-		{!! Form::submit('Create', array('class' => 'btn btn-primary')) !!}
+			<div class="form-group">
+				@foreach($countries as $country)
+				<div class="country_item">
+					{!! Form::label('country_'.$country->code, $country->name) !!}
+					{!! Form::checkbox('countries[]', $country->code, null, ['class' => 'field', 'id' => 'country_'.$country->code]) !!}
+				</div>
+				@endforeach
+			</div>
+
+			{!! Form::submit('Create', array('class' => 'btn btn-primary')) !!}
 
 		{!! Form::close() !!}
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('.country_item').on('click', function(){
+					$(this).children(":last").attr('selected','selected');
+				});
+			});
+		</script>
 	</div>
 @include('cms.layouts.footer')
