@@ -1,6 +1,6 @@
-@include('layouts.header')
+@extends('layouts.master')
 
-
+@section('main')
 	<div class="widget-slider-wrap">
 		<div class="container">
 			<div class="row">
@@ -35,4 +35,4 @@
 	</div>
 </div>
 
-@include('layouts.footer')
+@stop

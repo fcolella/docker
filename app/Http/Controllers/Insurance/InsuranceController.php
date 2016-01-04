@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Insurance;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Commons;
-use App\Http\Controllers\Gulliver;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Response;
+
 use Illuminate\Support\Facades\URL;
 use Jaybizzle\Safeurl\Facades\Safeurl;
+use App\Http\Controllers\Gulliver;
 
+/**
+ * Class InsuranceController
+ * @package App\Http\Controllers\Insurance
+ */
 class InsuranceController extends Controller
 {
 	protected static $enabled = true;
@@ -26,24 +32,27 @@ class InsuranceController extends Controller
 
 	function __construct()
 	{
-	//	$form = Request::all(); Commons::print_pre($form,0,0);
+	//	$form = Request::all(); print_pre($form,0,0);
 		if (false == self::$enabled) {
 			return redirect(URL::to('/'),302)->send();
 		}
-		Commons::init();
+		parent::__construct();
 		//
 		if (false==Request::ajax()) {
-			//	Commons::addCss('Insurance/stylesheet.css');
-			//	Commons::addJsFooter('https://maps.googleapis.com/maps/api/js?key='.self::$config['gmap-api-key']);
-			Commons::addJsFooter('lib/jquery.validate.js');
-			Commons::addJsFooter('Insurance/SearchBox.js');
+		//	Controller::addCss('Insurance/stylesheet.css');
+		//	Controller::addJsFooter('https://maps.googleapis.com/maps/api/js?key='.self::$config['gmap-api-key']);
+			Controller::addJsFooter('lib/jquery.validate.js');
+			Controller::addJsFooter('Insurance/SearchBox.js');
 		}
-
 		//
 		view()->share([
-			'InsuranceSearch'	=> Cookie::get(self::$config['cookieName']),
-			'InsuranceZones'	=> Gulliver::getInsurancesFilters()['availableGeoZones'],
-			'InsuranceConfig'	=> self::$config
+			'InsuranceSearch'	    => Cookie::get(self::$config['cookieName']),
+			'InsuranceZones'	    => Gulliver::getInsurancesFilters()['availableGeoZones'],
+
+			'HomeSearchSliders'		=> Controller::getSearchSliders('insurance'),
+			'BanksSliders'			=> Controller::getBanks('slider'),
+			'DestinationsSliders'	=> Controller::getDestinations('slider'),
+			'InsuranceConfig'	    => self::$config
 		]);
 	}
 
@@ -59,18 +68,16 @@ class InsuranceController extends Controller
 	public function search()
 	{
 		Request::setMethod('POST');
-
-	//	$destination		= Request::get('destination',"");
 		$search = [
 			'origen'		=> mb_convert_case(Request::get('origin',""),MB_CASE_LOWER),
 			'destino'	    => Request::get('destination',""),
-			'fecha-desde'	=> Commons::dateFormat(Request::get('dateFrom',"")),
-			'fecha-hasta'	=> Commons::dateFormat(Request::get('dateTo',"")),
+			'fecha-desde'	=> dateFormat(Request::get('dateFrom',"")),
+			'fecha-hasta'	=> dateFormat(Request::get('dateTo',"")),
 			'pasajeros'	    => self::passengersParseForm()
 		];
-	//	$redirect = URL::to('/seguros/listado-de-seguros-en-'. Safeurl::make($destination)).'/?'.http_build_query($search);
+		//	$destination		= Request::get('destination',"");
+		//	$redirect = URL::to('/seguros/listado-de-seguros-en-'. Safeurl::make($destination)).'/?'.http_build_query($search);
 		$redirect = URL::to('/seguros/listado-de-seguros/?'.http_build_query($search));
-#Commons::print_pre(['search'=>$search,'redirect'=>$redirect]);
 		return redirect($redirect)->send();
 	}
 
@@ -78,9 +85,10 @@ class InsuranceController extends Controller
 	public function results()
 	{
 		$parameters = self::validateParams();
-#Commons::print_pre(['params'=>$params['search'],'errors'=>$params['errors']]);
-		Commons::$route = 'insurance-results';
-		Commons::addJsFooter('Insurance/Results.js');
+#print_pre(['params'=>$params['search'],'errors'=>$params['errors']]);
+		Controller::$route = 'insurance-results';
+		Controller::addJsFooter('Insurance/Results.js');
+	//	Controller::addCss('1200.css');
 		return view('Insurance/results')->with([
 			'ResultTitle'		=> sprintf(' Seguros en %1s', $parameters['search']['destination']),
 			'LoaderPrimary'		=> sprintf('Buscando seguros en %1s', $parameters['search']['destination']),
@@ -91,6 +99,56 @@ class InsuranceController extends Controller
 		]);
 	}
 
+	public function grid()
+	{
+#$form = Request::all(); print_pre($form,0,0);
+		$EncryptedSearch = Request::get('search',"");
+		if (""==$EncryptedSearch) {
+			return Response::json(['error'=>true,'description'=>'No search'],412);
+		}
+		//
+		try {
+			$search = \Illuminate\Support\Facades\Crypt::decrypt($EncryptedSearch);
+		} catch (\Exception $e) {
+			return Response::json(['error'=>true,'description'=>'Search decode'],412);
+		}
+#print_pre($search);
+		//
+		$response = Gulliver::getInsuranceavAilability([
+			'origin'			=> mb_convert_case($search['origin'],MB_CASE_UPPER),
+			'destination'	    => mb_convert_case($search['destination'],MB_CASE_TITLE),
+			'dateFrom'			=> $search['dateFrom'],
+			'dateTo'			=> $search['dateTo'],
+			'passengers'		=> (true==is_array($search['passengers'])) ? implode(',',$search['passengers']) : $search['passengers'],
+			'currency'			=> 'ARS'
+		]);
+		if (false==$response) {
+			return Response::json(['error'=>true,'description'=>Gulliver::$error],412);
+		} else {
+			$response = $response['availablePlans'];
+		}
+#print_pre($response,0,1);
+		foreach($response as $key => $item) {
+			$response[$key]['insuranceTotalPrices']['requestedSellingPrice']['taxes'] = $item['insuranceTotalPrices']['requestedSellingPrice']['afterTax'] - $item['insuranceTotalPrices']['requestedSellingPrice']['beforeTax'];
+		}
+		//
+		return Response::json([
+			'error'			=> false,
+			'description'	=> 'Ok',
+			'total'			=> sizeof($response),
+			'grid'			=> view('Insurance/Grid')->with([
+				'destination'	=> mb_convert_case($search['destination'],MB_CASE_LOWER),
+				'response'		=> $response,
+			//	'pagination'	=> [
+			//		'total'		=> ceil($total/$per_page),
+			//		'current'	=> ($page+1),
+			//		'perpage'	=> $per_page
+			//	]
+			])->render()
+		],200);
+
+	}
+
 	//
 	static function validateParams()
 	{
@@ -99,10 +157,8 @@ class InsuranceController extends Controller
 		$date_max = str_replace('+', 'P', strtoupper(self::$config['maxdate']));
 
 		Request::setMethod('GET');
-		$form = Request::all(); Commons::print_pre($form,0,0);
 
 		$origin = Request::get('origen',"");
-		$origin = mb_convert_case($origin,MB_CASE_TITLE);
 		if (""==$origin) {
 			$errors[] = 'Debe elegir una ciudad de origen';
 		}
@@ -116,7 +172,7 @@ class InsuranceController extends Controller
 		if ("" == $dateFrom) {
 			$errors[] = 'Debe elegir una fecha inicial para siu seguro';
 		} else {
-			$validDate = Commons::dateValidate($dateFrom, $date_min, $date_max);
+			$validDate = dateValidate($dateFrom, $date_min, $date_max);
 			if (true !== $validDate) {
 				if ('min' == $validDate) {
 					$errors[] = 'La fecha inicial no debe ser anterior a la fecha actual + 3 días';
@@ -132,7 +188,7 @@ class InsuranceController extends Controller
 		if ("" == $dateFrom) {
 			$errors[] = 'Debe elegir una fecha inicial para siu seguro';
 		} else {
-			$validDate = Commons::dateValidate($dateTo,$date_min,$date_max);
+			$validDate = dateValidate($dateTo,$date_min,$date_max);
 			if (true !== $validDate) {
 				if ('min' == $validDate) {
 					$errors[] = 'La fecha final no debe ser anterior a la fecha actual + 3 días';
@@ -152,13 +208,13 @@ class InsuranceController extends Controller
 		//
 		$search = [
 			'origin'			=> $origin,
-			'destination'	    => $destination,
+			'destination'	    => $destination,MB_CASE_UPPER,
 			'dateFrom'			=> $dateFrom,
 			'dateTo'			=> $dateTo,
 			'passengers'		=> $passengers
 		];
 		//
-Commons::print_pre(['search'=>$search,'errors'=>$errors],0,0);
+#print_pre(['search'=>$search,'errors'=>$errors],0,0);
 		return ['search'=>$search,'errors'=>$errors];
 	}
 
@@ -175,7 +231,6 @@ Commons::print_pre(['search'=>$search,'errors'=>$errors],0,0);
 		for ($pass=1; $pass<=$passengers; $pass++) {
 			$return[] = $ages[$pass];
 		}
-#Commons::print_pre(['$passengers'=>$passengers,'$ages'=>$ages,'$return'=>$return]);
 		return implode('-',$return);
 	}
 
@@ -192,7 +247,6 @@ Commons::print_pre(['search'=>$search,'errors'=>$errors],0,0);
 		foreach($passengers as $key => $age) {
 			$return[] = $age;
 		}
-#Commons::print_pre(['$passengers'=>$passengers,'$return'=>$return]);
 		return $return;
 	}
 }

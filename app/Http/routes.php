@@ -40,7 +40,7 @@ Route::group(['prefix' => 'seguros'], function() {
     Route::get('/', 'Insurance\InsuranceController@index');
     Route::post('search', 'Insurance\InsuranceController@search');
     Route::get('listado-{slug?}', 'Insurance\InsuranceController@results');
-    Route::get('grilla', 'Insurance\InsuranceController@grid');
+    Route::post('grilla', 'Insurance\InsuranceController@grid');
 });
 
 

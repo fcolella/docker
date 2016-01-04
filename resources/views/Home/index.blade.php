@@ -1,5 +1,6 @@
-@include('layouts.header')
+@extends('layouts.master')
 
+@section('main')
 @if (!empty($SearchBoxes))
 	<div class="widget-slider-wrap">
 		<div class="container">
@@ -46,4 +47,4 @@
 	</div>
 </div>
 
-@include('layouts.footer')
+@stop

@@ -70,6 +70,7 @@ class Gulliver extends Controller
 				self::$error = true;
 				return false;
 			}
+#print_pre($response);
 			//	Decode the response
 			$response = json_decode($response, true);
 #dd(['response'=>$response,'method'=>$method]);

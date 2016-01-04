@@ -61,9 +61,8 @@
 				</div>
 			</div>
 			<div class="col-md-12">
-				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<button class="btn reservar_btn col-md-6" type="submit">Buscar</button>
 			</div>
 		</div>
-		<div class="clear margen">&nbsp;</div>
+		<div class="clearfix">&nbsp;</div>
 	</form>
