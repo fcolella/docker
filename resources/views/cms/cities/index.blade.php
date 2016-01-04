@@ -1,6 +1,6 @@
 @include('cms.layouts.header')
     <h1 class="page-header">Cities</h1>
-    <table class="table table-bordered" id ="cities-list">
+    <table class="table table-bordered" id="cities-list" style="width:100%;display:none">
     <thead>
     <tr>
         <td>ID</td>
@@ -37,10 +37,14 @@
     </tbody>
 </table>
 
+<div id="overlay">
+    <img src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/images/loadingAnimation.gif" alt="Loading">
+</div>
+
 <script type="text/javascript">
-$(document).ready(function() {
-    $('#cities-list').DataTable();
-});
+    $(document).ready(function() {
+        $('#cities-list').DataTable({"initComplete":function(){$('#cities-list').show();$('#overlay').fadeOut(800)}})
+    });
 </script>
 
 @include('cms.layouts.footer')
