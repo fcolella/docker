@@ -15,11 +15,15 @@ class Gulliver extends Controller
 	public		static $error = false;
 	private		static $cache_ttl = 0;
 	private		static $cache_name = "";
-	private		static $data = [];
 
-	protected static $timeout = 60;
-	protected static $returntransfer = true;
-	protected static $encoding = 'gzip';
+	protected	static $timeout = 60;
+	protected	static $returntransfer = true;
+	protected	static $encoding = 'gzip';
+
+	static function init()
+	{
+	//	Cache::flush();
+	}
 
 	/**
 	 *
@@ -31,7 +35,6 @@ class Gulliver extends Controller
 		//	private
 		self::$cache_ttl = 0;
 		self::$cache_name = "";
-		self::$data = [];
 		//	protected
 		self::$cache_ttl = 0;
 		self::$timeout = 60;
@@ -46,21 +49,21 @@ class Gulliver extends Controller
 	 * @param array $data
 	 * @return array|bool
 	 */
-	static function call($service="",$method="", $data=[])
+	static function call($service="",$method="", $parameters=[])
 	{
-		Cache::flush();
 		//	Check if cache exist
 		$response = Cache::get(self::$cache_name);
 		if (null == $response)
 		{
 			//	Curl call
-			$response = Curl::to(config('services.gulliver.host') . ':' . config('services.gulliver.port') . '/' . $service . '/' . $method)
-				->withData($data)
+			$response = Curl::to( config('services.gulliver.host').':'.config('services.gulliver.port').'/'.$service.((false==empty($method)) ? '/'.$method : "") )
+				->withData($parameters)
 				->withOption('TIMEOUT', self::$timeout)
 				->withOption('FAILONERROR', false)
 				->withOption('RETURNTRANSFER', self::$returntransfer)
 				->withOption('ENCODING', self::$encoding)
 				->get();
+#dd(['to'=>config('services.gulliver.host').':'.config('services.gulliver.port').'/'.$service.((false==empty($method)) ? '/'.$method : ""),'response'=>$response]);
 			//	Check response
 			if (false == $response)
 			{
@@ -69,6 +72,7 @@ class Gulliver extends Controller
 			}
 			//	Decode the response
 			$response = json_decode($response, true);
+#dd(['response'=>$response,'method'=>$method]);
 			//	Check for json error
 			if (json_last_error() != JSON_ERROR_NONE)
 			{
@@ -121,16 +125,15 @@ class Gulliver extends Controller
 	 */
 	static function getCities($countryCode="",$stateCode="",$cityCode="")
 	{
+		$parameters = [];
 		//	Data set ?
-		("" != $countryCode)		? self::$data['countryCode'] = $countryCode : null;
-		("" != $stateCode)			? self::$data['stateCode'] = $stateCode : null;
-		("" != $cityCode)			? self::$data['cityCode'] = $cityCode : null;
+		("" != $countryCode)		? $parameters['countryCode'] = $countryCode : null;
+		("" != $stateCode)			? $parameters['stateCode'] = $stateCode : null;
+		("" != $cityCode)			? $parameters['cityCode'] = $cityCode : null;
 		//
-		self::$cache_name = 'gulliver-cities'.((0 < sizeof(self::$data)) ? '-'.implode('-', self::$data) : "");
-		//
+		self::$cache_name = 'gulliver-cities'.((0 < sizeof($parameters)) ? '-'.implode('-',$parameters) : "");
 		self::$cache_ttl = 60;
-		//
-		return self::call('services/v3.8/address','cities',self::$data);
+		return self::call('services/v3.8/address','cities',$parameters);
 	}
 
 	/**
@@ -141,15 +144,14 @@ class Gulliver extends Controller
 	 */
 	static function getStates($countryCode="",$stateCode="")
 	{
+		$parameters = [];
 		//	Data set ?
-		("" != $countryCode)		? self::$data['countryCode'] = $countryCode : null;
-		("" != $stateCode)			? self::$data['stateCode'] = $stateCode : null;
+		("" != $countryCode)		? $parameters['countryCode'] = $countryCode : null;
+		("" != $stateCode)			? $parameters['stateCode'] = $stateCode : null;
 		//
-		self::$cache_name = 'gulliver-states'.((0 < sizeof(self::$data)) ? '-'-implode('-', self::$data): "");
-		//
+		self::$cache_name = 'gulliver-states'.((0 < sizeof($parameters)) ? '-'-implode('-',$parameters): "");
 		self::$cache_ttl = 60;
-		//
-		return self::call('services/v3.8/address','states',self::$data);
+		return self::call('services/v3.8/address','states',$parameters);
 	}
 
 	/*
@@ -170,22 +172,21 @@ class Gulliver extends Controller
 	 */
 	static function getFlightsOffers($validDate="",$origin="",$destination="",$departureFrom="",$departureTo="",$paxQuantity="",$limitPriceCurrency="",$limitPriceAmount="",$requestedCurrency="")
 	{
+		$parameters = [];
 		//	Data set ?
-		("" != $validDate)			? self::$data['validDate'] = $validDate : null;
-		("" != $origin)				? self::$data['origin'] = $origin : null;
-		("" != $destination)		? self::$data['destination'] = $destination : null;
-		("" != $departureFrom)		? self::$data['departureFrom'] = $departureFrom : null;
-		("" != $departureTo)		? self::$data['departureTo'] = $departureTo : null;
-		("" != $paxQuantity)		? self::$data['paxQuantity'] = $paxQuantity : null;
-		("" != $limitPriceCurrency)	? self::$data['limitPriceCurrency'] = $limitPriceCurrency : null;
-		("" != $limitPriceAmount)	? self::$data['limitPriceAmount'] = $limitPriceAmount : null;
-		("" != $requestedCurrency)	? self::$data['requestedCurrency'] = $requestedCurrency : null;
+		("" != $validDate)			? $parameters['validDate'] = $validDate : null;
+		("" != $origin)				? $parameters['origin'] = $origin : null;
+		("" != $destination)		? $parameters['destination'] = $destination : null;
+		("" != $departureFrom)		? $parameters['departureFrom'] = $departureFrom : null;
+		("" != $departureTo)		? $parameters['departureTo'] = $departureTo : null;
+		("" != $paxQuantity)		? $parameters['paxQuantity'] = $paxQuantity : null;
+		("" != $limitPriceCurrency)	? $parameters['limitPriceCurrency'] = $limitPriceCurrency : null;
+		("" != $limitPriceAmount)	? $parameters['limitPriceAmount'] = $limitPriceAmount : null;
+		("" != $requestedCurrency)	? $parameters['requestedCurrency'] = $requestedCurrency : null;
 		//
-		self::$cache_name = 'gulliver-flights-offers'.((0 < sizeof(self::$data)) ? '-'.implode('-', self::$data): "");
-		//
+		self::$cache_name = 'gulliver-flights-offers'.((0 < sizeof($parameters)) ? '-'.implode('-',$parameters): "");
 		self::$cache_ttl = 60;
-		//
-		return self::call('services/latest/flights','offers',self::$data);
+		return self::call('services/latest/flights','offers',$parameters);
 	}
 
 	/**
@@ -198,13 +199,35 @@ class Gulliver extends Controller
 	 */
 	static function getFlightsCalendars($offerId="")
 	{
+		$parameters = [];
 		//	Data set ?
-		("" != $offerId)			? self::$data['offerId'] = $offerId : null;
+		("" != $offerId)			? $parameters['offerId'] = $offerId : null;
 		//
-		self::$cache_name = 'gulliver-flights-calendars'.((0 < sizeof(self::$data)) ? '-'.implode('-', self::$data) : "" );
-		//
+		self::$cache_name = 'gulliver-flights-calendars'.((0 < sizeof($parameters)) ? '-'.implode('-',$parameters) : "");
 		self::$cache_ttl = 60;
+		return self::call('services/latest/flights/offers','calendars',$parameters);
+	}
+
+	/**
+	 *
+	 * @return array|bool
+	 */
+	static function getInsurancesFilters()
+	{
 		//
-		return self::call('services/latest/flights/offers','calendars',self::$data);
+		self::$cache_name = 'gulliver-insurances-filters';
+		self::$cache_ttl = (60*24);
+		return self::call('services/latest/availability/insurances/filters','',[]);
+	}
+
+	/**
+	 * http://200.85.108.10:9000/services/latest/availability/insurances?origin=bue&destination=EUROPA¤cy=ARS&passengers=30&dateFrom=2014-02-02&dateTo=2014-02-10
+	 */
+	static function getInsuranceavAilability($parameters=[])
+	{
+		//
+		self::$cache_name = 'gulliver-insurances-availability-'.implode('-',$parameters);
+		self::$cache_ttl = 60;
+		return self::call('services/latest/availability/insurances','',$parameters);
 	}
 }

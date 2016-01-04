@@ -1,3 +1,4 @@
+@inject('Commons','App\Http\Controllers\Commons')
 <!DOCTYPE html>
 <html lang="es">
 <head>

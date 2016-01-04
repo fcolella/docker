@@ -25,9 +25,18 @@ Route::group(['prefix' => 'cms'], function()
 	});
 });
 
-Route::get('/','Home\Main@index');
+Route::get('/',['as' => 'home', 'uses' => 'Home\Main@index']);
 
-Route::get('/{landing?}/{name?}', 'Landing\Landing@index')->where(['landing'=>'[A-Za-z]+', 'name'=>'[A-Za-z]+']);
+/** **/
+Route::group(['prefix' => 'seguros'], function() {
+    Route::get('/', 'Insurance\InsuranceController@index');
+    Route::post('search', 'Insurance\InsuranceController@search');
+    Route::get('listado-{slug?}', 'Insurance\InsuranceController@results');
+    Route::get('grilla', 'Insurance\InsuranceController@grid');
+});
+
+
+Route::get('/{landing?}/{name?}', 'Landing\LandingController@index')->where(['landing'=>'[A-Za-z]+', 'name'=>'[A-Za-z]+']);
 
 
 
