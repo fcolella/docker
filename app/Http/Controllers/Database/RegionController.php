@@ -30,8 +30,28 @@ class RegionController extends Controller
      */
     public function create()
     {
+		$all_countries = Country::orderBy('name', 'asc')->get();
+		$all_countries_ordered_list = collect();
+
+		$current_country_letter = '-';
+		$helper_collection = collect();
+		$countries_length = $all_countries->count() - 1;
+		foreach($all_countries as $key => $country){
+			$country_letter = strtolower($country->name[0]);
+
+			if($country_letter != $current_country_letter){
+				if($current_country_letter != '-') $all_countries_ordered_list->put(strtoupper($current_country_letter), $helper_collection);
+				$current_country_letter = $country_letter;
+				$helper_collection = collect();
+			}
+
+			$helper_collection->push($country);
+			if($key == $countries_length) $all_countries_ordered_list->put(strtoupper($current_country_letter), $helper_collection);
+		}
+
 		return 	view('cms/regions/create')
-				->with('countries', Country::all());
+				->with('countries_ordered_list', $all_countries_ordered_list)
+				->with('countries', $all_countries);
     }
 
     /**

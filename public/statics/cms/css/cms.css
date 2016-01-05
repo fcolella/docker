@@ -40,9 +40,21 @@ body .main .cms-title-container .cms-btn-create {
   vertical-align: bottom;
 }
 
+body .main .cms-title-container .regions-edit-submit,
+body .main .cms-title-container .regions-create-submit {
+  display: inline-block;
+  margin: 0 0 0 15px;
+  vertical-align: text-bottom;
+}
+
 body .main .cms-message-container {
   display: block;
-  margin: 20px 0 0 0;
+  margin: 20px 0;
+}
+
+body .main .cms-message-container ul {
+  margin: 0;
+  padding: 0 0 0 20px;
 }
 
 body .main .cms-message-container .bg-success,
@@ -139,21 +151,21 @@ body .main .cms-content .regions-selected-countries-fixed {
   width: 100%;
 }
 
-body .main .region-form-content {
+body .main .region-content {
   margin: -3px 0 0;
 }
 
-body .main .region-form-content .region-country-group {
+body .main .region-content .region-country-group {
   display: block;
   border-bottom: 1px solid #dedede;
   padding: 0 0 20px;
 }
 
-body .main .region-form-content .region-country-group span {
+body .main .region-content .region-country-group span {
   display: block;
   margin: 23px 0 15px;
 }
 
-body .main .region-form-content .region-country-group span h3 {
+body .main .region-content .region-country-group span h3 {
   margin: 0;
 }
