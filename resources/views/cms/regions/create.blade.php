@@ -51,7 +51,7 @@
 					}
 				});
 
-				$('.region-form-content [name="name"]').focus();
+				$('.region-content [name="name"]').focus();
 
 				$('.regions-create-submit').click(function(){
 					var name = $("input[name='name']").val().length;

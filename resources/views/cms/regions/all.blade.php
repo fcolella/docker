@@ -38,15 +38,45 @@
 					</td>
 					<td>
 						<a class="btn btn-small btn-info" href="{{ URL::to(getenv('CMS_PATH').'/regions/'.$region->id.'/edit') }}">Edit</a>
-						<a class="btn btn-small btn-danger" href="{{ URL::to(getenv('CMS_PATH').'/regions/'.$region->id.'/destroy') }}">Delete</a>
+						<a class="btn btn-small btn-danger cms-btn-delete" id="region-delete-{{ $region->id }}" data-href="{{ URL::to(getenv('CMS_PATH').'/regions/'.$region->id.'/destroy') }}">Delete</a>
 					</td>
 				</tr>
 				@endforeach
 			</tbody>
 		</table>
+		<div class="cms-modal-container"></div>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$('#regions-list').DataTable();
+
+				$(document).on('click', '.cms-btn-delete', function(){
+					var region_id = $(this).attr('id').split('-'); region_id = region_id[2];
+					var region_href = $(this).data('href');
+					var modal =    '<div class="modal fade" id="confirm-delete-region" tabindex="-1" role="dialog" aria-hidden="true">' +
+										'<div class="modal-dialog">' +
+											'<div class="modal-content">' +
+												'<div class="modal-header">Delete Region</div>' +
+												'<div class="modal-body">' +
+													'<p>Are sure you want to delete the selected Region?</p><p>You can\'t undo this action</p>' +
+												'</div>' +
+												'<div class="modal-footer">' +
+													'<button type="button" class="btn btn-default btn-close-modal" data-dismiss="modal">Cancel</button>' +
+													'<a href="'+region_href+'" class="btn btn-danger btn-ok">Delete</a>' +
+												'</div>' +
+											'</div>' +
+										'</div>' +
+									'</div>';
+
+					$('.cms-modal-container').html(modal);
+					$('#confirm-delete-region').modal('show');
+				});
+
+				$(document).on('click', '.btn-close-modal', function(){
+					$('#confirm-delete-region').remove();
+					$('.modal-backdrop').fadeOut('fast', function(){
+						$(this).remove();
+					});
+				});
 			});
 		</script>
 	</div>

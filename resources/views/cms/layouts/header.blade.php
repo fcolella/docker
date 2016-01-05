@@ -17,8 +17,8 @@
 
 	<script src="{{ asset('statics/cms/js/jquery/2.1.4/jquery.min.js') }}"></script>
 	<script src="{{ asset('statics/cms/js/jquery-ui/1.11.4/jquery-ui.min.js') }}"></script>
-	<script src="{{ asset('statics/cms/js/bootstrap/3.3.6/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('statics/cms/js/datatables/datatables.min.js') }}"></script>
+	<script src="{{ asset('statics/cms/js/bootstrap/3.3.6/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('statics/cms/js/plugins/gv-scrollup.js') }}"></script>
 	<script>
 		$(document).ready(function(){
