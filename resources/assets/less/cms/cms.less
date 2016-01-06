@@ -1,45 +1,173 @@
-.sidebar{
-  position: unset;
-}
+body{
+  .navbar-header{
+    margin-left: -15px !important;
 
-.main{
-  display: block;
-  margin: auto;
-  float: left;
-
-  .cms-title-container{
-    display: block;
-
-    h1{
-      display: inline-block;
-      margin: 0;
-    }
-
-    .cms-btn-create{
-      display: inline-block;
-      margin: 0 0 0 15px;
-      vertical-align: bottom;
+    .cms-navbar-logo{
+      float:left;
+      margin-right: 15px;
     }
   }
 
-  .cms-message-container{
-    display: block;
-    margin: 20px 0 0 0;
-
-    .bg-success, .bg-info, .bg-danger{
-      padding: 15px;
-    }
+  .sidebar{
+    position: unset;
   }
 
-  .cms-content{
-    display: block;
-    margin: 30px 0 0 0;
+  .scrollup{
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    cursor: pointer;
+    opacity: 0.8;
+  }
 
-    .table{
-      width: 100% !important;
-      
-      thead tr td{
-        background-color: #edf5fc;
+  .main{
+    display: block;
+    margin: auto;
+    float: left;
+
+    .cms-title-container{
+      display: block;
+
+      h1{
+        display: inline-block;
+        margin: 0;
+      }
+
+      .cms-btn-create{
+        display: inline-block;
+        margin: 0 0 0 15px;
+        vertical-align: bottom;
+      }
+
+      .regions-edit-submit, .regions-create-submit{
+        display: inline-block;
+        margin: 0 0 0 15px;
+        vertical-align: text-bottom;
+      }
+    }
+
+    .cms-message-container{
+      display: block;
+      margin: 20px 0;
+
+      ul{
+        margin: 0;
+        padding: 0 0 0 20px;
+      }
+
+      .bg-success, .bg-info, .bg-danger{
+        padding: 15px;
+      }
+    }
+
+    .cms-content{
+      display: block;
+      margin: 30px 0 0 0;
+
+      .table{
+        width: 100% !important;
+
+        thead tr td{
+          background-color: #edf5fc;
+        }
+      }
+
+      .form-group{
+        .country_item{
+          border-radius: 9px;
+          cursor: pointer;
+          display: inline-block;
+          margin: 0 10px 0 0;
+          width: 147px;
+
+          label, input{
+            cursor: pointer;
+          }
+
+          label{
+            float: right;
+            width: 124px;
+            font-weight: normal;
+            line-height: 18px;
+          }
+
+          .label-bold{
+            font-weight: bold;
+            line-height: 19px;
+          }
+
+          input{
+            vertical-align: text-top;
+            margin-top: 1px;
+          }
+        }
+      }
+
+      .regions-selected-countries{
+        border-bottom: 1px solid #dedede;
+        display: block;
+        margin: 20px 0 23px;
+        padding: 5px 0 20px;
+
+        .regions-selected-country{
+          display: inline-block !important;
+          margin: 0 10px 10px 0;
+
+          &:hover{
+            background-color: #c9302c;
+            border-color: #ac2925;
+          }
+
+          span{
+            display: inline-block;
+            margin: 1px 0 0 5px;
+            vertical-align: text-top;
+          }
+        }
+
+        .regions-selected-country-transition{
+          background-color: #337ab7;
+          border-color: #2e6da4;
+          -webkit-transition: background-color 500ms linear;
+          -moz-transition: background-color 500ms linear;
+          -o-transition: background-color 500ms linear;
+          -ms-transition: background-color 500ms linear;
+          transition: background-color 500ms linear;
+        }
+
+        .regions-selected-country-new{
+          background-color: #5cb85c; border-color: #4cae4c;
+        }
+      }
+
+      .regions-selected-countries-fixed{
+        background-color: #F1F2FE;
+        border: medium none;
+        box-shadow: 0 1px 8px #b4b4b4;
+        left: 0;
+        padding: 20px 10% 10px;
+        position: fixed;
+        top: 30px;
+        width: 100%;
+      }
+    }
+
+    .region-content{
+      margin: -3px 0 0;
+
+      .region-country-group{
+        display: block;
+        border-bottom: 1px solid #dedede;
+        padding: 0 0 20px;
+
+        span{
+          display: block;
+          margin: 23px 0 15px;
+
+          h3{
+            margin: 0;
+          }
+        }
       }
     }
   }

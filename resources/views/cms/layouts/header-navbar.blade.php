@@ -1,7 +1,7 @@
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="container-fluid cms-header-bar">
             <div class="navbar-header">
+				<img class="cms-navbar-logo" src="{{ asset('statics/cms/images/cms_logo.jpg') }}" />
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>

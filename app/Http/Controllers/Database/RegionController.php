@@ -30,8 +30,28 @@ class RegionController extends Controller
      */
     public function create()
     {
+		$all_countries = Country::orderBy('name', 'asc')->get();
+		$all_countries_ordered_list = collect();
+
+		$current_country_letter = '-';
+		$helper_collection = collect();
+		$countries_length = $all_countries->count() - 1;
+		foreach($all_countries as $key => $country){
+			$country_letter = strtolower($country->name[0]);
+
+			if($country_letter != $current_country_letter){
+				if($current_country_letter != '-') $all_countries_ordered_list->put(strtoupper($current_country_letter), $helper_collection);
+				$current_country_letter = $country_letter;
+				$helper_collection = collect();
+			}
+
+			$helper_collection->push($country);
+			if($key == $countries_length) $all_countries_ordered_list->put(strtoupper($current_country_letter), $helper_collection);
+		}
+
 		return 	view('cms/regions/create')
-				->with('countries', Country::all());
+				->with('countries_ordered_list', $all_countries_ordered_list)
+				->with('countries', $all_countries);
     }
 
     /**
@@ -84,7 +104,8 @@ class RegionController extends Controller
 		$region = Region::findOrFail($id_region);
 		$region_countries = $region->countries()->getResults()->keyBy('code')->toArray();
 
-		$all_countries = Country::all();
+		$all_countries = Country::orderBy('name', 'asc')->get();
+		$all_countries_ordered_list = collect();
 		$filtered_country_list = collect();
 
 		foreach($all_countries as $country){
@@ -93,9 +114,26 @@ class RegionController extends Controller
 			}
 		}
 
+		$current_country_letter = '-';
+		$helper_collection = collect();
+		$countries_length = $all_countries->count() - 1;
+		foreach($all_countries as $key => $country){
+			$country_letter = strtolower($country->name[0]);
+
+			if($country_letter != $current_country_letter){
+				if($current_country_letter != '-') $all_countries_ordered_list->put(strtoupper($current_country_letter), $helper_collection);
+				$current_country_letter = $country_letter;
+				$helper_collection = collect();
+			}
+
+			$helper_collection->push($country);
+			if($key == $countries_length) $all_countries_ordered_list->put(strtoupper($current_country_letter), $helper_collection);
+		}
+
 		return 	view('cms/regions/edit')
 				->with('region', $region)
 				->with('countries', $all_countries)
+				->with('countries_ordered_list', $all_countries_ordered_list)
 				->with('filtered_country_list', $filtered_country_list);
     }
 
