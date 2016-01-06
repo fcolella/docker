@@ -1,48 +1,171 @@
-.sidebar {
+body .navbar-header {
+  margin-left: -15px !important;
+}
+
+body .navbar-header .cms-navbar-logo {
+  float: left;
+  margin-right: 15px;
+}
+
+body .sidebar {
   position: unset;
 }
 
-.main {
+body .scrollup {
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+body .main {
   display: block;
   margin: auto;
   float: left;
 }
 
-.main .cms-title-container {
+body .main .cms-title-container {
   display: block;
 }
 
-.main .cms-title-container h1 {
+body .main .cms-title-container h1 {
   display: inline-block;
   margin: 0;
 }
 
-.main .cms-title-container .cms-btn-create {
+body .main .cms-title-container .cms-btn-create {
   display: inline-block;
   margin: 0 0 0 15px;
   vertical-align: bottom;
 }
 
-.main .cms-message-container {
-  display: block;
-  margin: 20px 0 0 0;
+body .main .cms-title-container .regions-edit-submit,
+body .main .cms-title-container .regions-create-submit {
+  display: inline-block;
+  margin: 0 0 0 15px;
+  vertical-align: text-bottom;
 }
 
-.main .cms-message-container .bg-success,
-.main .cms-message-container .bg-info,
-.main .cms-message-container .bg-danger {
+body .main .cms-message-container {
+  display: block;
+  margin: 20px 0;
+}
+
+body .main .cms-message-container ul {
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+
+body .main .cms-message-container .bg-success,
+body .main .cms-message-container .bg-info,
+body .main .cms-message-container .bg-danger {
   padding: 15px;
 }
 
-.main .cms-content {
+body .main .cms-content {
   display: block;
   margin: 30px 0 0 0;
 }
 
-.main .cms-content .table {
+body .main .cms-content .table {
   width: 100% !important;
 }
 
-.main .cms-content .table thead tr td {
+body .main .cms-content .table thead tr td {
   background-color: #edf5fc;
+}
+
+body .main .cms-content .form-group .country_item {
+  border-radius: 9px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 10px 0 0;
+  width: 147px;
+}
+
+body .main .cms-content .form-group .country_item label,
+body .main .cms-content .form-group .country_item input {
+  cursor: pointer;
+}
+
+body .main .cms-content .form-group .country_item label {
+  float: right;
+  width: 124px;
+  font-weight: normal;
+  line-height: 18px;
+}
+
+body .main .cms-content .form-group .country_item .label-bold {
+  font-weight: bold;
+  line-height: 19px;
+}
+
+body .main .cms-content .form-group .country_item input {
+  vertical-align: text-top;
+  margin-top: 1px;
+}
+
+body .main .cms-content .regions-selected-countries {
+  border-bottom: 1px solid #dedede;
+  display: block;
+  margin: 20px 0 23px;
+  padding: 5px 0 20px;
+}
+
+body .main .cms-content .regions-selected-countries .regions-selected-country {
+  display: inline-block !important;
+  margin: 0 10px 10px 0;
+}
+
+body .main .cms-content .regions-selected-countries .regions-selected-country:hover {
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+
+body .main .cms-content .regions-selected-countries .regions-selected-country span {
+  display: inline-block;
+  margin: 1px 0 0 5px;
+  vertical-align: text-top;
+}
+
+body .main .cms-content .regions-selected-countries .regions-selected-country-transition {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  transition: background-color 500ms linear;
+}
+
+body .main .cms-content .regions-selected-countries .regions-selected-country-new {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+body .main .cms-content .regions-selected-countries-fixed {
+  background-color: #F1F2FE;
+  border: medium none;
+  box-shadow: 0 1px 8px #b4b4b4;
+  left: 0;
+  padding: 20px 10% 10px;
+  position: fixed;
+  top: 30px;
+  width: 100%;
+}
+
+body .main .region-content {
+  margin: -3px 0 0;
+}
+
+body .main .region-content .region-country-group {
+  display: block;
+  border-bottom: 1px solid #dedede;
+  padding: 0 0 20px;
+}
+
+body .main .region-content .region-country-group span {
+  display: block;
+  margin: 23px 0 15px;
+}
+
+body .main .region-content .region-country-group span h3 {
+  margin: 0;
 }
