@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
 use Jaybizzle\Safeurl\Facades\Safeurl;
 use App\Http\Controllers\Gulliver;
+use App\Http\Controllers\Insurance\InsuranceModel;
 
 /**
  * Class InsuranceController
@@ -26,8 +27,7 @@ class InsuranceController extends Controller
 		'maxdate'			=> '+12m', 	//	months
 		'maxPassengers'     => 9,
 		'maxAge'			=> 86,
-		'pagination'		=> 10,
-	//	'gmap-api-key'		=> 'AIzaSyCr9TSmbziRz1sG8HCBZpGgzvYrqRPiuH4',
+		'pagination'		=> 10
 	];
 
 	function __construct()
@@ -39,8 +39,7 @@ class InsuranceController extends Controller
 		parent::__construct();
 		//
 		if (false==Request::ajax()) {
-		//	Controller::addCss('Insurance/stylesheet.css');
-		//	Controller::addJsFooter('https://maps.googleapis.com/maps/api/js?key='.self::$config['gmap-api-key']);
+			Controller::addCss('Insurance/stylesheet.css');
 			Controller::addJsFooter('lib/jquery.validate.js');
 			Controller::addJsFooter('Insurance/SearchBox.js');
 		}
@@ -75,8 +74,8 @@ class InsuranceController extends Controller
 			'fecha-hasta'	=> dateFormat(Request::get('dateTo',"")),
 			'pasajeros'	    => self::passengersParseForm()
 		];
-		//	$destination		= Request::get('destination',"");
-		//	$redirect = URL::to('/seguros/listado-de-seguros-en-'. Safeurl::make($destination)).'/?'.http_build_query($search);
+	//	$destination		= Request::get('destination',"");
+	//	$redirect = URL::to('/seguros/listado-de-seguros-en-'. Safeurl::make($destination)).'/?'.http_build_query($search);
 		$redirect = URL::to('/seguros/listado-de-seguros/?'.http_build_query($search));
 		return redirect($redirect)->send();
 	}
@@ -85,10 +84,9 @@ class InsuranceController extends Controller
 	public function results()
 	{
 		$parameters = self::validateParams();
-#print_pre(['params'=>$params['search'],'errors'=>$params['errors']]);
 		Controller::$route = 'insurance-results';
 		Controller::addJsFooter('Insurance/Results.js');
-	//	Controller::addCss('1200.css');
+		//
 		return view('Insurance/results')->with([
 			'ResultTitle'		=> sprintf(' Seguros en %1s', $parameters['search']['destination']),
 			'LoaderPrimary'		=> sprintf('Buscando seguros en %1s', $parameters['search']['destination']),
@@ -99,20 +97,19 @@ class InsuranceController extends Controller
 		]);
 	}
 
+	//
 	public function grid()
 	{
-#$form = Request::all(); print_pre($form,0,0);
 		$EncryptedSearch = Request::get('search',"");
 		if (""==$EncryptedSearch) {
 			return Response::json(['error'=>true,'description'=>'No search'],412);
 		}
 		//
 		try {
-			$search = \Illuminate\Support\Facades\Crypt::decrypt($EncryptedSearch);
+			$search = Crypt::decrypt($EncryptedSearch);
 		} catch (\Exception $e) {
 			return Response::json(['error'=>true,'description'=>'Search decode'],412);
 		}
-#print_pre($search);
 		//
 		$response = Gulliver::getInsuranceavAilability([
 			'origin'			=> mb_convert_case($search['origin'],MB_CASE_UPPER),
@@ -124,13 +121,35 @@ class InsuranceController extends Controller
 		]);
 		if (false==$response) {
 			return Response::json(['error'=>true,'description'=>Gulliver::$error],412);
-		} else {
-			$response = $response['availablePlans'];
 		}
-#print_pre($response,0,1);
+		//
+		$sessionId = $response['sessionId'];
+		$response = $response['availablePlans'];
+		//
 		foreach($response as $key => $item) {
 			$response[$key]['insuranceTotalPrices']['requestedSellingPrice']['taxes'] = $item['insuranceTotalPrices']['requestedSellingPrice']['afterTax'] - $item['insuranceTotalPrices']['requestedSellingPrice']['beforeTax'];
+			//
+			$row = InsuranceModel::store([
+				'session'        => $sessionId,
+				'plan_number'    => $key,
+				'item'           => json_encode($response[$key]),
+				'search'         => json_encode($search)
+			]);
+		/**
+			//  http://viajes-laravel.dev/seguros/compra/?GID=71ff1103-d3c6-4e12-92b1-0caccc864d2a&RID=1
+			$response[$key]['booking'] = url().'/seguros/compra/?'.http_build_query([
+				'GID' => $sessionId,
+				'RID' => $row->id
+			]);
+		**/
+			//  http://viajes-laravel.dev/compra/seguros/?GID=71ff1103-d3c6-4e12-92b1-0caccc864d2a&RID=1
+			$response[$key]['booking'] = url().'/compra/seguros/?'.http_build_query([
+				'GID' => $sessionId,
+				'RID' => $row->id
+			]);
 		}
+		//
+		Cookie::queue(self::$config['cookieName'],$search,self::$config['cookieTtl']);
 		//
 		return Response::json([
 			'error'			=> false,
@@ -138,17 +157,31 @@ class InsuranceController extends Controller
 			'total'			=> sizeof($response),
 			'grid'			=> view('Insurance/Grid')->with([
 				'destination'	=> mb_convert_case($search['destination'],MB_CASE_LOWER),
-				'response'		=> $response,
-			//	'pagination'	=> [
-			//		'total'		=> ceil($total/$per_page),
-			//		'current'	=> ($page+1),
-			//		'perpage'	=> $per_page
-			//	]
+				'response'		=> $response
 			])->render()
 		],200);
-
 	}
 
+	//
+	function booking()
+	{
+		$gulliver_sessionId = Request::get('GID',"");
+		$database_id        = Request::get('RID',"");
+		if (""==$gulliver_sessionId) {
+			abort(404);
+		}
+		if (""==$database_id) {
+			abort(404);
+		}
+		//
+		$row = InsuranceModel::where('session', $gulliver_sessionId)->where('id', $database_id)->first()->toArray();
+		$row['search']  = json_decode($row['search'],true);
+		$row['item']    = json_decode($row['item'],true);
+print_pre($row,0,0);
+	}
+/***********************************************************************************************************************
+* FUNCTIONS
+***********************************************************************************************************************/
 	//
 	static function validateParams()
 	{
@@ -208,13 +241,12 @@ class InsuranceController extends Controller
 		//
 		$search = [
 			'origin'			=> $origin,
-			'destination'	    => $destination,MB_CASE_UPPER,
+			'destination'	    => $destination,
 			'dateFrom'			=> $dateFrom,
 			'dateTo'			=> $dateTo,
 			'passengers'		=> $passengers
 		];
 		//
-#print_pre(['search'=>$search,'errors'=>$errors],0,0);
 		return ['search'=>$search,'errors'=>$errors];
 	}
 

@@ -108,7 +108,7 @@ class Gulliver extends Controller
 			//	Cache Store ?
 			if (0 < self::$cache_ttl)
 			{
-				Cache::put(self::$cache_name, $response, self::$cache_ttl);
+				$name = Cache::put(self::$cache_name, $response, self::$cache_ttl);
 			}
 		}
 		//

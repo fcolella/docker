@@ -23,7 +23,7 @@ function InsiranceGrid(uri) {
 		async: true,
 		timeout: 60000,
 		method: 'POST',
-		url: uri+'&filters='+filters,
+		url: uri, //+'&filters='+filters,
 		beforeSend: function(){
 
 		},
@@ -33,9 +33,8 @@ function InsiranceGrid(uri) {
 			} else {
 				if(data.grid){
 					$('.result-list').html(data.grid).css('visibility','visible').hide();
-					$('#result-total').html(data.total).parent().toggleClass('hidden');
+					$('#result-total').html(data.total+' resultados').parent().toggleClass('hidden');
 					Grid_Success();
-					$('.result-list').fadeIn(1200)
 				}
 			}
 		},
@@ -50,17 +49,20 @@ function InsiranceGrid(uri) {
 	});
 }
 
+var Insuranceform,InsuranceRow;
 function Grid_Success() {
-/**
-	// zonas
-	$.each($('select[name="destination"] option:not(selected)'),function(){
-		var value = $(this).val().trim();
-		if (""!=value) {
-			var $htmlzonas = '<li><a href="zona.php?destino=' + capitalize($data.zonas[i]) + '" title="Asistencia al viajero en ' + capitalize($data.zonas[i]) + '">' + capitalize($data.zonas[i]) + '</a></li>';
-			$('.zonas').append($htmlzonas);
-		}
+
+	Insuranceform = $('form[name="form-seguros"]');
+		Insuranceform.find('h2.row:first').append('<span class="SlideArrowUp pull-right">▲</span>').append('<span class="SlideArrowDown pull-right hidden" style="display: inline;"> ▼</span>');
+	InsuranceRow = Insuranceform.find('div.row:first');
+	InsuranceRow.addClass('hidden');
+	$('.SlideArrowUp, .SlideArrowDown, .toggle-search, h2.row:first').on('click',function(e){
+		e.stopPropagation();e.preventDefault();
+		InsuranceRow.toggleClass('hidden');
+		$('.SlideArrowUp, .SlideArrowDown').toggleClass('hidden');
+		tamDiv();
 	});
-**/
+
 	//
 	$('a.viewAll').on('click',function(e) {
 		e.preventDefault();
@@ -69,6 +71,7 @@ function Grid_Success() {
 		$(this).parent().find('.viewLess').show();
 		$(this).hide();
 		$('html,body').animate({scrollTop: $(this).parent().offset().top});
+		tamDiv();
 		return false;
 	});
 	//
@@ -79,6 +82,22 @@ function Grid_Success() {
 		$(this).parent().find('.viewAll').show();
 		$(this).hide();
 		$('html,body').animate({scrollTop: $(this).parent().offset().top});
+		tamDiv();
 		return false;
 	});
+	//
+	tamDiv();
+	$('.result-title').removeClass('hidden');
+	$('.result-list').fadeIn(1200)
+}
+
+function tamDiv(){
+	$body       = $('.result-list').height();
+	$callForm   = $('.widget-busqueda-wrap').height();
+
+	if($callForm < $body){
+		$diff = $body - $callForm;
+		$('.secundary').css('min-height', $diff);
+	}
+
 }

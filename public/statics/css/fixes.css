@@ -1,13 +1,8 @@
+header {background-color:white;font-family:"Roboto",sans-serif;font-size: 14px}
 .clear:after {content:" ";display:table;clear:both}
-body.insurance-results .widget-busqueda-wrap {position:initial}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {background-color:#04a6e4;color:#b8ecff;}
+header a:focus, aside a:focus, footer a:focus, header a:hover, aside a:hover, footer a:hover {color:#04a6e4;text-decoration:underline}
+.navbar-garbarino {margin-bottom:0;background-color:#04a6e4;border:1px solid transparent}
+.navbar-garbarino .navbar-nav > li > a {color:#fff}
+.owl-theme .owl-controls {width:100%}
 
-.sidebar {background-color:#f8f8f8;border-color:#e7e7e7}
-
-.product-list {background:#f1f1f1 none repeat scroll 0 0;border-radius:3px;display:block;font-weight:normal;margin: 0 0 1rem;padding:1rem;position: relative;text-decoration: none !important}
-.product-list h2 {margin:0 10px}
-.product-list:hover {box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5)}
-.product-list .price {text-align: center}
-.product-list .price-title {padding: 0 0 2rem}
-.product-list .price-currency {color: #0793d2;font-size:20px;font-weight:normal;line-height:20px;margin:0}
-.product-list .price-amount {color: #0793d2;font-size:20px;font-weight:bold;line-height:20px;margin:0}
-.product-list .actions {padding:2rem 0 0 0}

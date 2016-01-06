@@ -56,18 +56,14 @@ var InsuranceSearchBox = {
 			if (""==inputField.val()) {
 				inputField.datepicker('option',{defaultDate:newDate}).datepicker('setDate',newDate)
 			} else {
-				var newDate=inputField.val().split('/')
-					newDate=new Date(newDate[2], newDate[1]-1, newDate[0])
-				inputField.datepicker('option',{defaultDate:newDate}).datepicker('setDate',newDate)
+				var newDate=inputField.val().split('-'); newDate=new Date(newDate[0], newDate[1]-1, newDate[2]); inputField.datepicker('option',{defaultDate:newDate}).datepicker('setDate',newDate)
 			}
 		}
 		if ('dateTo'==inputField.attr('name')) {
 			if ("" == inputField.val()) {
 				inputField.datepicker('option',{defaultDate:newDate}).datepicker('setDate',newDate)
 			} else {
-				var newDate=inputField.val().split('/')
-					newDate=new Date(newDate[2], newDate[1]-1, newDate[0])
-				inputField.datepicker('option',{defaultDate:newDate}).datepicker('setDate',newDate)
+				var newDate=inputField.val().split('-');newDate=new Date(newDate[0], newDate[1]-1, newDate[2]); inputField.datepicker('option',{defaultDate:newDate}).datepicker('setDate',newDate)
 			}
 			var dateFromgetDate=InsuranceSearchBox.config.formfileds.dateFrom.datepicker('getDate')
 				dateFromgetDate.setDate(dateFromgetDate.getDate()+1)

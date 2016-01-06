@@ -12,6 +12,7 @@
 */
 
 
+/**  CMS  **/
 Route::group(['prefix' => 'cms'], function()
 {
     Route::get('/', ['as' => 'cms.index', 'uses' => 'Cms\Main@index']);
@@ -33,45 +34,27 @@ Route::group(['prefix' => 'cms'], function()
 	});
 });
 
+
+/**  BOOKING  **/
+Route::group(['prefix' => 'compra'], function()
+{
+	//  http://viajes-laravel.dev/compra/seguros/?GID=71ff1103-d3c6-4e12-92b1-0caccc864d2a&RID=1
+	Route::get('seguros', 'Booking\InsuranceController@index');
+});
+
+
+/**  WEB HOME  **/
 Route::get('/',['as' => 'home', 'uses' => 'Home\Main@index']);
 
-/** **/
-Route::group(['prefix' => 'seguros'], function() {
+/**  WEB INSURANCE  **/
+Route::group(['prefix' => 'seguros'], function()
+{
     Route::get('/', 'Insurance\InsuranceController@index');
     Route::post('search', 'Insurance\InsuranceController@search');
     Route::get('listado-{slug?}', 'Insurance\InsuranceController@results');
     Route::post('grilla', 'Insurance\InsuranceController@grid');
+//	Route::get('compra', 'Insurance\InsuranceController@booking');
 });
 
-
-Route::get('/{landing?}/{name?}', 'Landing\LandingController@index')->where(['landing'=>'[A-Za-z]+', 'name'=>'[A-Za-z]+']);
-
-
-
-/**
-//  https://ajgallego.gitbooks.io/laravel-5/content/capitulo_2_rutas_avanzadas.html
-Route::group(['prefix' => 'api/offers'], function()
-{
-    //
-    Route::get('hotels/{format?}', function($format='json') {
-        //
-        $name = Request::query('name','lalala');
-        $response = ['name' => $name,'location' => __FILE__.':'.__LINE__, 'api' => 'offers', 'product' => 'hotels', 'format' => $format, 'status' => true, 'offers' => [ [],[],[],[],[],[] ] ];
-        if ('json'===$format) {
-            return Response::json($response);
-        } else {
-            print_r($response);die;
-        }
-    });
-    //
-    Route::get('flight/{format?}', function($format='json') {
-        $name = Request::query('name','lalala');
-        $response = ['name' => $name,'location' => __FILE__.':'.__LINE__, 'api' => 'offers', 'product' => 'flight', 'format' => $format, 'status' => true, 'offers' => [ [],[],[],[],[],[] ] ];
-        if ('json'===$format) {
-            return Response::json($response);
-        } else {
-            print_r($response);die;
-        }
-    });
-});
-**/
+/** WEB LANDINGS **/
+//Route::get('/{landing?}/{name?}', 'Landing\LandingController@index')->where(['landing'=>'[A-Za-z]+', 'name'=>'[A-Za-z]+']);

@@ -2,16 +2,10 @@
 
 @section('main')
 	<div class="widget-slider-wrap">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-5 container-widget-busqueda">
-					<div class="widget-busqueda-wrap">
-						<div class="tab-content">
-                       		<div role="tabpanel" class="tab-pane fade active in" id="insurance">
-                       			@include('layouts.insurance.search')
-                       		</div>
-                       	</div>
-					</div>
+		<div class="col-md-5 container-widget-busqueda">
+			<div class="widget-busqueda-wrap">
+				 <div class="tab-content">
+					@include('layouts.insurance.search')
 				</div>
 			</div>
 		</div>

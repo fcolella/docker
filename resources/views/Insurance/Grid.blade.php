@@ -33,7 +33,7 @@
 				<span class="price-currency">{{ $plan['insuranceTotalPrices']['requestedSellingPrice']['currency'] }}</span>
 				<span class="price-amount">{{ ceil($plan['insuranceTotalPrices']['requestedSellingPrice']['afterTax']) }}</span>
 				<div class="actions">
-					<a class="btn btn-block btn-info">Comprar</a>
+					<a href="{{ $plan['booking'] }}" class="btn btn-block btn-info">Comprar</a>
 				</div>
 			</div>
 
