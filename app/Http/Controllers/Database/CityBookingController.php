@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers\Database;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Models\Tag;
-use App\Http\Models\Tag_items;
-use App\Http\Models\Region;
+use App\Http\Models\City_booking;
 use App\Http\Models\Country;
-use App\Http\Models\City;
-use App\Http\Models\Offer_air;
+use App\Http\Controllers\Gulliver;
 
-class TagController extends Controller
+class CityBookingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,9 +19,51 @@ class TagController extends Controller
      */
     public function index()
     {
-		return 	view('cms/tags/all')
-				->with('tags', Tag::all());
+		return view('cities-booking/index')->with('cities', City_booking::all());
     }
+
+    public function fetch()
+    {
+		$cities = Gulliver::getCitiesBooking();
+		if(true == Gulliver::$error){
+			$status = 'danger';
+		}else{
+			foreach ($cities as $item) {
+				$city = City_booking::where('id', $item['id'])->first();
+				if (null == $city) {
+					$city = new City_booking;
+				}
+				$city->forceFill($item);
+				$city->save();
+			}
+			$status = 'success';
+		}
+		//
+		return view('cities-booking/fetch')->with([
+			'status' => $status,
+			'cities' => $cities
+		]);
+	}
+
+	public function query($query)
+	{
+		$query = strtolower(filter_var($query, FILTER_SANITIZE_STRING));
+		$cities_raw = Gulliver::getCitiesBooking();
+		$cities = array();
+
+		if(!Gulliver::$error){
+			foreach($cities_raw as $city){
+				$city_name = strtolower($city['name']);
+				if(strstr($city_name, $query)){
+					$country = Country::where('code', $city['country'])->first();
+					$city = array('value' => $city['name'].', '.$country->name.' ('.$city['country'].')');
+					$cities[] = $city;
+				}
+			}
+		}
+
+		return json_encode($cities);
+	}
 
     /**
      * Show the form for creating a new resource.
@@ -33,14 +72,7 @@ class TagController extends Controller
      */
     public function create()
     {
-		$regions = Region::all();
-		$countries = Country::orderBy('name', 'asc')->get();
-		$offers_air = Offer_air::orderBy('offerId', 'asc')->get();
-
-		return 	view('cms/tags/create')
-				->with('regions', $regions)
-				->with('countries', $countries)
-				->with('offers_air', $offers_air);
+        //
     }
 
     /**
@@ -86,7 +118,7 @@ class TagController extends Controller
     public function update(Request $request, $id)
     {
         //
-    }
+	}
 
     /**
      * Remove the specified resource from storage.

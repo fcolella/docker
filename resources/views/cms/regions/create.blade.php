@@ -1,7 +1,7 @@
 @include('cms.layouts.header')
 	<div class="cms-title-container">
 		<h1>Create Region</h1>
-		<div class="btn btn-primary regions-create-submit">Save</div>
+		<div class="btn btn-success cms-btn-submit">Save</div>
 	</div>
 	<div class="cms-message-container">
 		@if(count($errors) > 0)
@@ -37,7 +37,7 @@
 				@endforeach
 			</div>
 
-			{!! Form::submit('Save', array('class' => 'btn btn-primary')) !!}
+			<div class="btn btn-success cms-btn-submit">Save</div>
 
 		{!! Form::close() !!}
 
@@ -53,7 +53,7 @@
 
 				$('.region-content [name="name"]').focus();
 
-				$('.regions-create-submit').click(function(){
+				$('.cms-btn-submit').click(function(){
 					var name = $("input[name='name']").val().length;
 					var checkbox = $("input[name='countries[]']:checked").length;
 
@@ -70,6 +70,8 @@
 							var error = $('<li />', { text : 'The countries field is required.', "class" : 'error-checkbox' });
 							$('.cms-message-container .bg-danger ul').append(error);
 						}
+
+						$('html, body').animate({ scrollTop: 0 }, 'slow');
 
 						return false;
 					}else{

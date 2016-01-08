@@ -14,7 +14,7 @@ class Tag_items extends Model
      */
     public function tag()
     {
-        return $this->hasOne('App\Http\Models\Tag', 'id_tag');
+        return $this->belongsTo('App\Http\Models\Tag', 'id_tag');
     }
 
     /**

@@ -18,7 +18,6 @@ class RegionController extends Controller
      */
     public function index()
     {
-
 		return 	view('cms/regions/all')
 				->with('regions', Region::all());
     }
@@ -171,7 +170,7 @@ class RegionController extends Controller
 		}
 
 		return 	redirect()->route('regions.index')
-			->with('message_update', 'Region '.$region->name.' has been successfully updated');
+				->with('message_update', 'Region '.$region->name.' has been successfully updated');
     }
 
     /**
@@ -193,6 +192,6 @@ class RegionController extends Controller
 		}
 
 		return 	redirect()->route('regions.index')
-			->with('message_delete', 'Region '.$region_name.' has been successfully deleted');
+				->with('message_delete', 'Region '.$region_name.' has been successfully deleted');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Models\City;
 
 class Country extends Model
 {
@@ -15,6 +16,14 @@ class Country extends Model
      */
     public function region()
     {
-        return $this->hasOne('App\Http\Models\Region', 'id_region');
+        return $this->belongsTo('App\Http\Models\Region');
     }
+
+	/**
+	 * Get the Cities associated with the Country.
+	 */
+	public function cities()
+	{
+		return $this->hasMany('App\Http\Models\City', 'id_country');
+	}
 }
