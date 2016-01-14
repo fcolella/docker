@@ -1,3 +1,5 @@
+
+
 body {background-color:#f1f1f1;color:#3c3c3b;font-family:Arial,sans-serif;font-size:12px}
 body>.container {margin-bottom:10px}
 .main-footer {background-color:#fff}
@@ -6,12 +8,14 @@ h1 {color:#0793d2;font-size:24px;font-weight:bold;line-height:35px}
 #content.row {background-color:#ffffff;box-shadow:0 0 3px #cecece;border-radius:5px;margin-left:auto;margin-right:auto;padding:15px 0px 15px 20px}
 
 .container-widget-busqueda {margin:-1px 0 0 0}
-.widget-busqueda-wrap {position:initial}
+
+body.insurance-results .widget-busqueda-wrap {position:initial}
 .widget-busqueda-wrap .tab-content {min-height:auto;;border-radius:5px}
-.result-title {color:#555;font-size:13px;font-weight:bold;background-color:#ededed;padding:10px 0;margin:0 16px 15px 0;border-radius:5px}
+.result-title {display:none;color:#555;font-size:13px;font-weight:bold;background-color:#ededed;padding:10px 0;margin:0 16px 15px 0;border-radius:5px}
 .result-title  a {white-space:nowrap}
 .result-title  #result-total {text-align:right}
 
+.sidebar {display:none}
 .sidebar .secundary h3 {color:#3c3c3b;font-size:16px;font-weight:bold;margin:5px 0}
 .sidebar .secundary .bordeInf {border-bottom:1px dotted #b4b4b4;margin:20px 0 10px 0;padding-bottom:2px}
 .sidebar .secundary {margin-top:15px;background-color:#ededed;border-color:#e5e5e5;border-radius:5px}

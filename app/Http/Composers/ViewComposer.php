@@ -15,6 +15,7 @@ class ViewComposer
 {
 	public function compose(View $view)
 	{
+		Controller::addCss('fixes.css');
 		view()->share([
 			'ROOT'          => url(),
 			'STATICS'       => Controller::$static,
@@ -32,3 +33,4 @@ class ViewComposer
 		]);
 	}
 }
+

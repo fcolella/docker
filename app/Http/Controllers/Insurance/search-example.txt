@@ -1,0 +1,16 @@
+Array
+(
+    [origin] => bue
+    [destination] => europa
+    [dateFrom] => 2016-01-17
+    [dateTo] => 2016-01-18
+    [passengers] => Array
+        (
+            [0] => 45
+        )
+
+)
+
+Called from the file: /Users/gabrielvazquez/Sites/viajes/app/Http/Controllers/Booking/InsuranceController.php, Line: 217
+
+End.

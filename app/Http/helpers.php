@@ -65,6 +65,25 @@ function dateFormat($date=false, $format='Y-m-d')
 }
 
 /**
+ *
+ * @param number $amount
+ * @return string
+ **/
+function amountFormat($amount=0,$decimal_amount=null,$decimal_separator=null,$thousand_separator=null)
+{
+	if (is_null($decimal_amount)) {
+		$decimal_amount = Controller::$settings['currency']['decimal_amount'];
+	}
+	if (is_null($decimal_separator)) {
+		$decimal_separator = Controller::$settings['currency']['decimal_separator'];
+	}
+	if (is_null($thousand_separator)) {
+		$thousand_separator = Controller::$settings['currency']['thousand_separator'];
+	}
+	return (string) number_format($amount, $decimal_amount, $decimal_separator, $thousand_separator);
+}
+
+/**
  * Método para imprimir preformateado
  * @param mixed $datos
  * @param bool $var_dump

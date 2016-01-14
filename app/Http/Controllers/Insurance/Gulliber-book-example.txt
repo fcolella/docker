@@ -1,0 +1,674 @@
+Array
+(
+    [dateTo] => 2016-01-16
+    [success] => 1
+    [bookingId] => N7IZZA
+    [coveredTravelersCount] => 2
+    [sessionId] => 64624cfb-9bf9-4b5d-8d29-bad8ee5c5bbe
+    [dateFrom] => 2016-01-15
+    [requestedCurrency] => ARS
+    [purchasedPlans] => Array
+        (
+            [0] => Array
+                (
+                    [insurancePlan] => Array
+                        (
+                            [insuranceProvider] => TVA
+                            [name] => EuropeEUR30.000
+                            [description] => Europe30.000Euros
+                            [tripType] => SINGLE_TRIP
+                            [validTo] => 2016-09-30T03:00:00Z
+                            [validFrom] => 2013-10-01T03:00:00Z
+                            [code] => EUR30K
+                            [quotingUnit] => PER_DAY
+                        )
+
+                    [coverages] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE1
+                                            [name] => AsistenciamÃƒÆ’Ã‚Â©dicaencasodeenfermedad
+                                            [order] => 1
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR30.000
+                                )
+
+                            [1] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE2
+                                            [name] => AsistenciamÃƒÆ’Ã‚Â©dicaencasodeaccidente
+                                            [order] => 2
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR30.000
+                                )
+
+                            [2] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE3
+                                            [name] => AsistenciamÃƒÆ’Ã‚Â©dicaencasodepre-existencia
+                                            [order] => 3
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR300
+                                )
+
+                            [3] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE4
+                                            [name] => MedicamentosInternaciÃƒÆ’Ã‚Â³noAmbulatorio
+                                            [order] => 4
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR1.000
+                                )
+
+                            [4] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE5
+                                            [name] => OdontologÃƒÆ’Ã‚Â­a
+                                            [order] => 5
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR250
+                                )
+
+                            [5] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE6
+                                            [name] => DÃƒÆ’Ã‚Â­ascomplementariosporinternaciÃƒÆ’Ã‚Â³n
+                                            [order] => 6
+                                            [priority] =>
+                                        )
+
+                                    [detail] => 2dÃƒÆ’Ã‚Â­as
+                                )
+
+                            [6] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE8
+                                            [name] => SegurodeAccidentesPersonalesencasodemuerteaccidentalentrasportepÃƒÆ’Ã‚Âºblico
+                                            [order] => 8
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaUSD60.000
+                                )
+
+                            [7] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE9
+                                            [name] => CompensaciÃƒÆ’Ã‚Â³nporpÃƒÆ’Ã‚Â©rdidadeequipajecomplementaria
+                                            [order] => 9
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR1.200
+                                )
+
+                            [8] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE11
+                                            [name] => Gastosdehotelporconvalecencia
+                                            [order] => 11
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR500
+                                )
+
+                            [9] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE12
+                                            [name] => GastosdehotelfamiliaracompaÃƒÆ’Ã‚Â±ante
+                                            [order] => 12
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR500
+                                )
+
+                            [10] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE13
+                                            [name] => Anticipodefondosparafianza
+                                            [order] => 13
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR10.000
+                                )
+
+                            [11] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE14
+                                            [name] => Transferenciadefondos
+                                            [order] => 14
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR2.000
+                                )
+
+                            [12] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE16
+                                            [name] => GarantÃƒÆ’Ã‚Â­agastoscancelaciÃƒÆ’Ã‚Â³n/interrupciÃƒÆ’Ã‚Â³nc/restricciÃƒÆ’Ã‚Â³ndecausas(h/75aÃƒÆ’Ã‚Â±os)
+                                            [order] => 16
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR1.000
+                                )
+
+                            [13] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE17
+                                            [name] => LocalizaciÃƒÆ’Ã‚Â³ndeequipaje
+                                            [order] => 17
+                                            [priority] =>
+                                        )
+
+                                    [detail] => Incluido
+                                )
+
+                            [14] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE18
+                                            [name] => TrasladodefamiliarencasodehospitalizaciÃƒÆ’Ã‚Â³n
+                                            [order] => 18
+                                            [priority] =>
+                                        )
+
+                                    [detail] => Incluido
+                                )
+
+                            [15] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE19
+                                            [name] => AsistenciaencasodeextravÃƒÆ’Ã‚Â­odedocumentos
+                                            [order] => 19
+                                            [priority] =>
+                                        )
+
+                                    [detail] => Incluido
+                                )
+
+                            [16] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE20
+                                            [name] => AcompaÃƒÆ’Ã‚Â±amientodemenores
+                                            [order] => 20
+                                            [priority] =>
+                                        )
+
+                                    [detail] => Incluido
+                                )
+
+                            [17] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE21
+                                            [name] => Viajederegresoporenfermedaddeltitular
+                                            [order] => 21
+                                            [priority] =>
+                                        )
+
+                                    [detail] => Incluido
+                                )
+
+                            [18] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE22
+                                            [name] => Trasladosanitario
+                                            [order] => 22
+                                            [priority] =>
+                                        )
+
+                                    [detail] => Incluido
+                                )
+
+                            [19] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE23
+                                            [name] => RepatriaciÃƒÆ’Ã‚Â³nsanitaria(incluidodentrodellÃƒÆ’Ã‚Â­mitedeasistenciamÃƒÆ’Ã‚Â©dica)
+                                            [order] => 23
+                                            [priority] =>
+                                        )
+
+                                    [detail] => Incluido
+                                )
+
+                            [20] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE24
+                                            [name] => Trasladoderestos(incluidodentrodellÃƒÆ’Ã‚Â­mitedeasistenciamÃƒÆ’Ã‚Â©dica)
+                                            [order] => 24
+                                            [priority] =>
+                                        )
+
+                                    [detail] => Incluido
+                                )
+
+                            [21] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE25
+                                            [name] => TransmisiÃƒÆ’Ã‚Â³ndemensajesurgentes
+                                            [order] => 25
+                                            [priority] =>
+                                        )
+
+                                    [detail] => Incluido
+                                )
+
+                            [22] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE26
+                                            [name] => LÃƒÆ’Ã‚Â­neadeconsultas24hs
+                                            [order] => 26
+                                            [priority] =>
+                                        )
+
+                                    [detail] => Incluido
+                                )
+
+                            [23] => Array
+                                (
+                                    [coverage] => Array
+                                        (
+                                            [code] => CODE27
+                                            [name] => CÃƒÆ’Ã‚Âºmuloporevento,accidenteconmÃƒÆ’Ã‚ÂºltiplesTitulares,aprorrata
+                                            [order] => 27
+                                            [priority] =>
+                                        )
+
+                                    [detail] => HastaEUR150.000
+                                )
+
+                        )
+
+                    [insuranceTotalPrices] => Array
+                        (
+                            [requestedPromotionalPrice] => Array
+                                (
+                                    [beforeTax] => 233.96
+                                    [afterTax] => 239.01
+                                    [currency] => ARS
+                                    [taxes] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [rate] => 0.105
+                                                    [baseAmount] => 47.41
+                                                    [name] => IVAGravadoal10.5%
+                                                    [amount] => 5.05
+                                                    [code] => GRAVADO105
+                                                    [currencyCode] => ARS
+                                                )
+
+                                        )
+
+                                )
+
+                            [requestedSellingPrice] => Array
+                                (
+                                    [beforeTax] => 310.91
+                                    [afterTax] => 324.12
+                                    [currency] => ARS
+                                    [taxes] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [rate] => 0.105
+                                                    [baseAmount] => 124.36
+                                                    [name] => IVAGravadoal10.5%
+                                                    [amount] => 13.21
+                                                    [code] => GRAVADO105
+                                                    [currencyCode] => ARS
+                                                )
+
+                                        )
+
+                                )
+
+                            [sellingPrice] => Array
+                                (
+                                    [beforeTax] => 16
+                                    [afterTax] => 16.68
+                                    [currency] => USD
+                                    [taxes] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [rate] => 0.105
+                                                    [baseAmount] => 6.4
+                                                    [name] => IVAGravadoal10.5%
+                                                    [amount] => 0.68
+                                                    [code] => GRAVADO105
+                                                    [currencyCode] => USD
+                                                )
+
+                                        )
+
+                                )
+
+                            [costPrice] => Array
+                                (
+                                    [beforeTax] => 9.6
+                                    [afterTax] => 9.6
+                                    [currency] => USD
+                                    [taxes] => Array
+                                        (
+                                        )
+
+                                )
+
+                            [currencyConversion] => Array
+                                (
+                                    [rateConversion] => 19.43
+                                    [requestedCurrency] => ARS
+                                    [sourceCurrency] => USD
+                                )
+
+                            [promotionalPrice] => Array
+                                (
+                                    [beforeTax] => 12.04
+                                    [afterTax] => 12.3
+                                    [currency] => USD
+                                    [taxes] => Array
+                                        (
+                                            [0] => Array
+                                                (
+                                                    [rate] => 0.105
+                                                    [baseAmount] => 2.44
+                                                    [name] => IVAGravadoal10.5%
+                                                    [amount] => 0.26
+                                                    [code] => GRAVADO105
+                                                    [currencyCode] => USD
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [insurancePassengerPrice] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [requestedPromotionalPrice] => Array
+                                        (
+                                            [beforeTax] => 116.98
+                                            [afterTax] => 119.5
+                                            [currency] => ARS
+                                            [taxes] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [rate] => 0.105
+                                                            [baseAmount] => 23.71
+                                                            [name] => IVAGravadoal10.5%
+                                                            [amount] => 2.53
+                                                            [code] => GRAVADO105
+                                                            [currencyCode] => ARS
+                                                        )
+
+                                                )
+
+                                        )
+
+                                    [requestedSellingPrice] => Array
+                                        (
+                                            [beforeTax] => 155.45
+                                            [afterTax] => 162.06
+                                            [currency] => ARS
+                                            [taxes] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [rate] => 0.105
+                                                            [baseAmount] => 62.18
+                                                            [name] => IVAGravadoal10.5%
+                                                            [amount] => 6.61
+                                                            [code] => GRAVADO105
+                                                            [currencyCode] => ARS
+                                                        )
+
+                                                )
+
+                                        )
+
+                                    [travelerAge] => 46
+                                    [sellingPrice] => Array
+                                        (
+                                            [beforeTax] => 8
+                                            [afterTax] => 8.34
+                                            [currency] => USD
+                                            [taxes] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [rate] => 0.105
+                                                            [baseAmount] => 3.2
+                                                            [name] => IVAGravadoal10.5%
+                                                            [amount] => 0.34
+                                                            [code] => GRAVADO105
+                                                            [currencyCode] => USD
+                                                        )
+
+                                                )
+
+                                        )
+
+                                    [costPrice] => Array
+                                        (
+                                            [beforeTax] => 4.8
+                                            [afterTax] => 4.8
+                                            [currency] => USD
+                                            [taxes] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [currencyConversion] => Array
+                                        (
+                                            [rateConversion] => 19.43
+                                            [requestedCurrency] => ARS
+                                            [sourceCurrency] => USD
+                                        )
+
+                                    [promotionalPrice] => Array
+                                        (
+                                            [beforeTax] => 6.02
+                                            [afterTax] => 6.15
+                                            [currency] => USD
+                                            [taxes] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [rate] => 0.105
+                                                            [baseAmount] => 1.22
+                                                            [name] => IVAGravadoal10.5%
+                                                            [amount] => 0.13
+                                                            [code] => GRAVADO105
+                                                            [currencyCode] => USD
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [1] => Array
+                                (
+                                    [requestedPromotionalPrice] => Array
+                                        (
+                                            [beforeTax] => 116.98
+                                            [afterTax] => 119.5
+                                            [currency] => ARS
+                                            [taxes] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [rate] => 0.105
+                                                            [baseAmount] => 23.71
+                                                            [name] => IVAGravadoal10.5%
+                                                            [amount] => 2.53
+                                                            [code] => GRAVADO105
+                                                            [currencyCode] => ARS
+                                                        )
+
+                                                )
+
+                                        )
+
+                                    [requestedSellingPrice] => Array
+                                        (
+                                            [beforeTax] => 155.45
+                                            [afterTax] => 162.06
+                                            [currency] => ARS
+                                            [taxes] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [rate] => 0.105
+                                                            [baseAmount] => 62.18
+                                                            [name] => IVAGravadoal10.5%
+                                                            [amount] => 6.61
+                                                            [code] => GRAVADO105
+                                                            [currencyCode] => ARS
+                                                        )
+
+                                                )
+
+                                        )
+
+                                    [travelerAge] => 40
+                                    [sellingPrice] => Array
+                                        (
+                                            [beforeTax] => 8
+                                            [afterTax] => 8.34
+                                            [currency] => USD
+                                            [taxes] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [rate] => 0.105
+                                                            [baseAmount] => 3.2
+                                                            [name] => IVAGravadoal10.5%
+                                                            [amount] => 0.34
+                                                            [code] => GRAVADO105
+                                                            [currencyCode] => USD
+                                                        )
+
+                                                )
+
+                                        )
+
+                                    [costPrice] => Array
+                                        (
+                                            [beforeTax] => 4.8
+                                            [afterTax] => 4.8
+                                            [currency] => USD
+                                            [taxes] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [currencyConversion] => Array
+                                        (
+                                            [rateConversion] => 19.43
+                                            [requestedCurrency] => ARS
+                                            [sourceCurrency] => USD
+                                        )
+
+                                    [promotionalPrice] => Array
+                                        (
+                                            [beforeTax] => 6.02
+                                            [afterTax] => 6.15
+                                            [currency] => USD
+                                            [taxes] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [rate] => 0.105
+                                                            [baseAmount] => 1.22
+                                                            [name] => IVAGravadoal10.5%
+                                                            [amount] => 0.13
+                                                            [code] => GRAVADO105
+                                                            [currencyCode] => USD
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+Called from the file: /Users/gabrielvazquez/Sites/viajes/app/Http/Controllers/Booking/InsuranceController.php, Line: 218
+
+End.

@@ -44,9 +44,13 @@ class InsuranceController extends Controller
 			Controller::addJsFooter('Insurance/SearchBox.js');
 		}
 		//
+		$availableGeoZones = Gulliver::getInsurancesFilters();
+		$availableGeoZones = (false==empty($availableGeoZones['availableGeoZones'])) ? $availableGeoZones['availableGeoZones'] : [];
+
+		//
 		view()->share([
 			'InsuranceSearch'	    => Cookie::get(self::$config['cookieName']),
-			'InsuranceZones'	    => Gulliver::getInsurancesFilters()['availableGeoZones'],
+			'InsuranceZones'	    => $availableGeoZones,
 
 			'HomeSearchSliders'		=> Controller::getSearchSliders('insurance'),
 			'BanksSliders'			=> Controller::getBanks('slider'),
@@ -58,6 +62,10 @@ class InsuranceController extends Controller
 	//
 	public function index()
 	{
+		self::addJsFooter('jquery/jquery.colorbox-min.js');
+		self::addJsFooter('funciones.js');
+		self::addJsFooter('lib/owl.carousel.min.js');
+		self::addJsFooter('main.js');
 		return view(
 			'Insurance/index'
 		);
@@ -111,7 +119,7 @@ class InsuranceController extends Controller
 			return Response::json(['error'=>true,'description'=>'Search decode'],412);
 		}
 		//
-		$response = Gulliver::getInsuranceavAilability([
+		$response = Gulliver::getInsuranceAvailability([
 			'origin'			=> mb_convert_case($search['origin'],MB_CASE_UPPER),
 			'destination'	    => mb_convert_case($search['destination'],MB_CASE_TITLE),
 			'dateFrom'			=> $search['dateFrom'],
@@ -119,6 +127,7 @@ class InsuranceController extends Controller
 			'passengers'		=> (true==is_array($search['passengers'])) ? implode(',',$search['passengers']) : $search['passengers'],
 			'currency'			=> 'ARS'
 		]);
+
 		if (false==$response) {
 			return Response::json(['error'=>true,'description'=>Gulliver::$error],412);
 		}
@@ -143,7 +152,7 @@ class InsuranceController extends Controller
 			]);
 		**/
 			//  http://viajes-laravel.dev/compra/seguros/?GID=71ff1103-d3c6-4e12-92b1-0caccc864d2a&RID=1
-			$response[$key]['booking'] = url().'/compra/seguros/?'.http_build_query([
+			$response[$key]['booking'] = url().'/compra/seguros?'.http_build_query([
 				'GID' => $sessionId,
 				'RID' => $row->id
 			]);

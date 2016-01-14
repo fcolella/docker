@@ -15,6 +15,10 @@ class Main extends Controller
 	//
 	public function index()
 	{
+		self::addJsFooter('jquery/jquery.colorbox-min.js');
+		self::addJsFooter('funciones.js');
+		self::addJsFooter('lib/owl.carousel.min.js');
+		self::addJsFooter('main.js');
 		return view(
 			'Home/index'
 		)

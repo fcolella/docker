@@ -115,7 +115,7 @@ $('.call-us').click(function(){
         $('.call-us-modal').fadeOut();
     });
 
-
+/**
     $.ajax({
         url: '/paquetes/ajax-home-list.php?tag=paquetes-turisticos',
         type: 'GET',
@@ -127,7 +127,7 @@ $('.call-us').click(function(){
 
         }
     });
-
+**/
 
     $(".suscripcion").click(function(ev){
         ev.preventDefault();

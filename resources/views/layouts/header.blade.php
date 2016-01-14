@@ -27,4 +27,4 @@
 
 <body class="{{ $route }}">
     @include('layouts.header-navbar')
-    <div class="container">
+    @yield('navbar')

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('main')
-
+		<div class="container container_12">
 			<h1 class="title">Asistencia al viajero en {{ mb_convert_case($InsuranceSearch['destination'],MB_CASE_TITLE,'UTF-8') }}</h1>
 			<div class="row" id="content">
 @if (empty($InsuranceErrors))
@@ -9,7 +9,7 @@
 @endif
 				<div class="result-title">
 					<div class="col-md-9">
-						Argentina - {{ mb_convert_case($InsuranceSearch['destination'],MB_CASE_TITLE,'UTF-8') }} | Desde: {{ date('d/m/Y', strtotime($InsuranceSearch['dateFrom'] )) }} | Hasta: {{ date('d/m/Y', strtotime($InsuranceSearch['dateTo'] )) }} | Pasajeros: {{ implode(', años ',$InsuranceSearch['passengers']) }}@if (sizeof($InsuranceSearch['passengers'])==1) años @endif |
+						Argentina - {{ mb_convert_case($InsuranceSearch['destination'],MB_CASE_TITLE,'UTF-8') }} | Desde: {{ date('d/m/Y', strtotime($InsuranceSearch['dateFrom'] )) }} | Hasta: {{ date('d/m/Y', strtotime($InsuranceSearch['dateTo'] )) }} | Pasajeros: {{ implode(' años, ',$InsuranceSearch['passengers']) }} años |
 						<a class="toggle-search">Cambiá tu búsqueda &gt;&gt;</a>
 					</div>
 					<div class="col-md-3" id="result-total"></div>
@@ -65,4 +65,5 @@
 @endif
 				</div>
 			</div>
+		</div>
 @stop

@@ -24,6 +24,7 @@
 			</div>
 		</div>
 	</div>
+@section('navbar')
 	<nav class="navbar navbar-default navbar-garbarino" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -55,4 +56,5 @@
 		<img src="{{ $STATICS }}{{ $DestinationsSelected['headers'] }}" style="width:100%;"/>
 		@endif
 	</nav>
+@endsection
 </header>

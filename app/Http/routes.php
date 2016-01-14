@@ -38,8 +38,13 @@ Route::group(['prefix' => 'cms'], function()
 /**  BOOKING  **/
 Route::group(['prefix' => 'compra'], function()
 {
-	//  http://viajes-laravel.dev/compra/seguros/?GID=71ff1103-d3c6-4e12-92b1-0caccc864d2a&RID=1
-	Route::get('seguros', 'Booking\InsuranceController@index');
+	//  Ajax
+	Route::get('CitiesAutocomplete', 'Booking\BookingController@CitiesAutocomplete');
+	Route::get('calculations', 'Booking\BookingController@Calculations');
+	//  http://viajes-laravel.dev/compra/seguros?GID=230b653f-a05a-4278-9148-ea9f30f437df&RID=34
+	Route::get('seguros', 'Booking\InsuranceController@Index');
+	//  form submit
+	Route::post('seguros', 'Booking\InsuranceController@Submit');
 });
 
 

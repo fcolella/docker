@@ -27,7 +27,7 @@
 
 			<div class="col-md-3 price">
 				@if ($SHOW_TRAVEL_SALE_TAG && $destination=='argentina')
-					<img src="/img/travelsale/tagsareos1.png" title="TravelSale" alt="TravelSale" style="position: absolute;z-index:200; right: -40px; top: -26px;"/>
+					<img src="{{ $STATICS}}images/travelsale/tagsareos1.png" title="TravelSale" alt="TravelSale" style="position: absolute;z-index:200; right: -40px; top: -26px;"/>
 				@endif
 				<div class="price-title">Precio Total Final</div>
 				<span class="price-currency">{{ $plan['insuranceTotalPrices']['requestedSellingPrice']['currency'] }}</span>

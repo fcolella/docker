@@ -26,7 +26,7 @@ abstract class Controller extends BaseController
 	function __construct()
 	{
 		//
-		self::$settings		= Config::get('garbarinoviajes');
+		self::$settings = Config::get('garbarinoviajes');
 		//
 		self::$static = url('statics') . '/';
 		//
@@ -38,14 +38,9 @@ abstract class Controller extends BaseController
 			self::addCss('https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.css');
 			self::addCss('details.css');
 		//	self::addCss('1200.css');
-			self::addCss('fixes.css');
 
 			self::addJsFooter('https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js');
 			self::addJsFooter('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js');
-			self::addJsFooter('jquery/jquery.colorbox-min.js');
-			self::addJsFooter('funciones.js');
-			self::addJsFooter('lib/owl.carousel.min.js');
-			self::addJsFooter('main.js');
 		}
 		//
 		\Illuminate\Support\Facades\Blade::extend(function($value)
@@ -202,7 +197,6 @@ abstract class Controller extends BaseController
 		}
 		return $items;
 	}
-
 
 	//
 	static function getSearchSliders($mode='home')

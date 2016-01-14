@@ -1,3 +1,4 @@
+
 	<form name="form-seguros" action="{{ URL::to('/seguros/search') }}" method="post" class="busqueda grid_5 alpha omega">
 		<h2 class="row">Busc&aacute; tu Seguro</h2>
 		<div class="row">
