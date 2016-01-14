@@ -20,6 +20,7 @@ class Gulliver extends Controller
 	protected static $timeout = 60;
 	protected static $returntransfer = true;
 	protected static $encoding = 'gzip';
+	protected static $gulliver_version = 'v3.8';
 
 	/**
 	 *
@@ -46,7 +47,7 @@ class Gulliver extends Controller
 	 * @param array $data
 	 * @return array|bool
 	 */
-	static function call($service="",$method="", $data=[])
+	static function call($service = "", $method = "", $data = [])
 	{
 		Cache::flush();
 		//	Check if cache exist
@@ -61,6 +62,7 @@ class Gulliver extends Controller
 				->withOption('RETURNTRANSFER', self::$returntransfer)
 				->withOption('ENCODING', self::$encoding)
 				->get();
+
 			//	Check response
 			if (false == $response)
 			{
@@ -70,6 +72,7 @@ class Gulliver extends Controller
 			//	Decode the response
 			$response = json_decode($response, true);
 			//	Check for json error
+
 			if (json_last_error() != JSON_ERROR_NONE)
 			{
 				self::$error = 'json error: '.json_last_error();
@@ -119,7 +122,7 @@ class Gulliver extends Controller
 	 * @param string $cityCode
 	 * @return mixed
 	 */
-	static function getCities($countryCode="",$stateCode="",$cityCode="")
+	static function getCitiesBooking($countryCode="",$stateCode="",$cityCode="")
 	{
 		//	Data set ?
 		("" != $countryCode)		? self::$data['countryCode'] = $countryCode : null;
@@ -139,17 +142,17 @@ class Gulliver extends Controller
 	 * @param string $stateCode
 	 * @return mixed
 	 */
-	static function getStates($countryCode="",$stateCode="")
+	static function getStatesBooking($countryCode="",$stateCode="")
 	{
 		//	Data set ?
 		("" != $countryCode)		? self::$data['countryCode'] = $countryCode : null;
 		("" != $stateCode)			? self::$data['stateCode'] = $stateCode : null;
 		//
-		self::$cache_name = 'gulliver-states'.((0 < sizeof(self::$data)) ? '-'-implode('-', self::$data): "");
+		self::$cache_name = 'gulliver-states'.((0 < sizeof(self::$data)) ? '-'.implode('-', self::$data): "");
 		//
 		self::$cache_ttl = 60;
 		//
-		return self::call('services/v3.8/address','states',self::$data);
+		return self::call('services/'.self::$gulliver_version.'/address', 'states', self::$data);
 	}
 
 	/*
@@ -168,7 +171,7 @@ class Gulliver extends Controller
 	 * @param string $requestedCurrency
 	 * @return mixed
 	 */
-	static function getFlightsOffers($validDate="",$origin="",$destination="",$departureFrom="",$departureTo="",$paxQuantity="",$limitPriceCurrency="",$limitPriceAmount="",$requestedCurrency="")
+	static function getFlightsOffers($validDate="",$origin="",$destination="",$departureFrom="",$departureTo="",$paxQuantity="",$limitPriceCurrency="",$limitPriceAmount="",$requestedCurrency="ARS")
 	{
 		//	Data set ?
 		("" != $validDate)			? self::$data['validDate'] = $validDate : null;
@@ -185,7 +188,7 @@ class Gulliver extends Controller
 		//
 		self::$cache_ttl = 60;
 		//
-		return self::call('services/latest/flights','offers',self::$data);
+		return self::call('services/v3.5/flights', 'offers', self::$data);
 	}
 
 	/**
@@ -205,6 +208,6 @@ class Gulliver extends Controller
 		//
 		self::$cache_ttl = 60;
 		//
-		return self::call('services/latest/flights/offers','calendars',self::$data);
+		return self::call('services/v3.5/flights/offers', 'calendars', self::$data);
 	}
 }

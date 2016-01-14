@@ -10,11 +10,11 @@
     $.fn.addScrollup = function(options){
         var defaults = {
             scrollClass: 'scrollup',
-            scrollImg: ''
+            scrollSvg: ''
         };
         options = $.extend(defaults, options);
 
-        var scroll = '<div class="'+options.scrollClass+'"><img src="'+options.scrollImg+'" /></div>';
+        var scroll = '<div class="'+options.scrollClass+'">'+options.scrollSvg+'</div>';
 
         $(window).scroll(function() {
             if($(this).scrollTop() >= 100){

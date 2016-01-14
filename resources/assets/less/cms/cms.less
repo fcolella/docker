@@ -1,3 +1,10 @@
+/* <!-- Variables */
+
+@viajes-cyan: #04a6e4; /* Color Main de viajes */
+@soft-gray: #dedede;
+
+/* Variables --> */
+
 body{
   .navbar-header{
     margin-left: -15px !important;
@@ -18,6 +25,57 @@ body{
     right: 25px;
     cursor: pointer;
     opacity: 0.8;
+
+    .scrollupIcon{
+      width: 60px;
+
+      &:hover path{
+        fill: @viajes-cyan;
+      }
+    }
+  }
+
+  .typeahead{
+    border: 1px solid @soft-gray;
+    font-size: 14px;
+    outline: medium none;
+    padding: 8px 12px;
+    display: block;
+  }
+
+  .tt-menu{
+    width: 422px;
+    margin: 7px 0;
+    padding: 8px 0;
+    background-color: #ffffff;
+    border: 1px solid @soft-gray;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+
+    .tt-dataset{
+      .tt-suggestion{
+        padding: 3px 20px;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: left;
+
+        &:hover{
+          cursor: pointer;
+          color: #ffffff;
+          background-color: @viajes-cyan;
+        }
+
+        .tt-cursor{
+          color: #ffffff;
+          background-color: @viajes-cyan;
+
+          p{
+            margin: 0;
+          }
+        }
+      }
+    }
   }
 
   .main{
@@ -39,7 +97,7 @@ body{
         vertical-align: bottom;
       }
 
-      .regions-edit-submit, .regions-create-submit{
+      .cms-btn-submit{
         display: inline-block;
         margin: 0 0 0 15px;
         vertical-align: text-bottom;
@@ -104,7 +162,7 @@ body{
       }
 
       .regions-selected-countries{
-        border-bottom: 1px solid #dedede;
+        border-bottom: 1px solid @soft-gray;
         display: block;
         margin: 20px 0 23px;
         padding: 5px 0 20px;
@@ -136,7 +194,8 @@ body{
         }
 
         .regions-selected-country-new{
-          background-color: #5cb85c; border-color: #4cae4c;
+          background-color: #5cb85c;
+          border-color: #4cae4c;
         }
       }
 
@@ -157,7 +216,7 @@ body{
 
       .region-country-group{
         display: block;
-        border-bottom: 1px solid #dedede;
+        border-bottom: 1px solid @soft-gray;
         padding: 0 0 20px;
 
         span{
@@ -166,6 +225,55 @@ body{
 
           h3{
             margin: 0;
+          }
+        }
+      }
+    }
+
+    .tag-content{
+      #tags-create-form{
+        .tag-table-container{
+          display: block;
+          border-bottom: 1px solid @soft-gray;
+          border-top: 1px solid @soft-gray;
+          padding: 20px 0 10px;
+          margin: 33px 0 30px;
+
+          .add-item-row{
+            display: inline-block;
+            margin: 0 0 10px;
+          }
+
+          table{
+            margin: 0 0 10px;
+
+            .tag-item-row{
+              td{
+                text-align: center;
+
+                .select-product-type{
+                  width: 200px;
+                  margin: 6px 0 0;
+                }
+
+                .select-city{
+                  height: 35px;
+                  padding: 0 10px;
+                  margin: -1px auto 0 !important;
+                }
+
+                .tag-item-select{
+                  display: none;
+                  width: 310px;
+                  margin: 5px auto 0;
+                }
+
+                .tag-item-order{
+                  width: 40px;
+                  margin: 2px 0 0;
+                }
+              }
+            }
           }
         }
       }

@@ -27,21 +27,23 @@
 			</tr>
 			</thead>
 			<tbody>
-				@foreach($regions as $key => $region)
-				<tr>
-					<td>{{ $region->id }}</td>
-					<td>{{ $region->name }}</td>
-					<td>
-						@foreach($region->countries as $index => $country)
-						{{ $country->name }}@if($index < $region->countries->count() - 1), @endif
-						@endforeach
-					</td>
-					<td>
-						<a class="btn btn-small btn-info" href="{{ URL::to(getenv('CMS_PATH').'/regions/'.$region->id.'/edit') }}">Edit</a>
-						<a class="btn btn-small btn-danger cms-btn-delete" id="region-delete-{{ $region->id }}" data-href="{{ URL::to(getenv('CMS_PATH').'/regions/'.$region->id.'/destroy') }}">Delete</a>
-					</td>
-				</tr>
-				@endforeach
+				@if($regions != '')
+					@foreach($regions as $key => $region)
+					<tr>
+						<td>{{ $region->id }}</td>
+						<td>{{ $region->name }}</td>
+						<td>
+							@foreach($region->countries as $index => $country)
+							{{ $country->name }}@if($index < $region->countries->count() - 1), @endif
+							@endforeach
+						</td>
+						<td>
+							<a class="btn btn-small btn-info" href="{{ URL::to(getenv('CMS_PATH').'/regions/'.$region->id.'/edit') }}">Edit</a>
+							<a class="btn btn-small btn-danger cms-btn-delete" data-href="{{ URL::to(getenv('CMS_PATH').'/regions/'.$region->id.'/destroy') }}">Delete</a>
+						</td>
+					</tr>
+					@endforeach
+				@endif
 			</tbody>
 		</table>
 		<div class="cms-modal-container"></div>
@@ -50,7 +52,6 @@
 				$('#regions-list').DataTable();
 
 				$(document).on('click', '.cms-btn-delete', function(){
-					var region_id = $(this).attr('id').split('-'); region_id = region_id[2];
 					var region_href = $(this).data('href');
 					var modal =    '<div class="modal fade" id="confirm-delete-region" tabindex="-1" role="dialog" aria-hidden="true">' +
 										'<div class="modal-dialog">' +
