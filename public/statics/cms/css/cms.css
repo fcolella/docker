@@ -1,3 +1,9 @@
+/* <!-- Variables */
+
+/* Color Main de viajes */
+
+/* Variables --> */
+
 body .navbar-header {
   margin-left: -15px !important;
 }
@@ -17,6 +23,53 @@ body .scrollup {
   right: 25px;
   cursor: pointer;
   opacity: 0.8;
+}
+
+body .scrollup .scrollupIcon {
+  width: 60px;
+}
+
+body .scrollup .scrollupIcon:hover path {
+  fill: #04a6e4;
+}
+
+body .typeahead {
+  border: 1px solid #dedede;
+  font-size: 14px;
+  outline: medium none;
+  padding: 8px 12px;
+  display: block;
+}
+
+body .tt-menu {
+  width: 422px;
+  margin: 7px 0;
+  padding: 8px 0;
+  background-color: #ffffff;
+  border: 1px solid #dedede;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+body .tt-menu .tt-dataset .tt-suggestion {
+  padding: 3px 20px;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: left;
+}
+
+body .tt-menu .tt-dataset .tt-suggestion:hover {
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #04a6e4;
+}
+
+body .tt-menu .tt-dataset .tt-suggestion .tt-cursor {
+  color: #ffffff;
+  background-color: #04a6e4;
+}
+
+body .tt-menu .tt-dataset .tt-suggestion .tt-cursor p {
+  margin: 0;
 }
 
 body .main {
@@ -40,8 +93,7 @@ body .main .cms-title-container .cms-btn-create {
   vertical-align: bottom;
 }
 
-body .main .cms-title-container .regions-edit-submit,
-body .main .cms-title-container .regions-create-submit {
+body .main .cms-title-container .cms-btn-submit {
   display: inline-block;
   margin: 0 0 0 15px;
   vertical-align: text-bottom;
@@ -168,4 +220,47 @@ body .main .region-content .region-country-group span {
 
 body .main .region-content .region-country-group span h3 {
   margin: 0;
+}
+
+body .main .tag-content #tags-create-form .tag-table-container {
+  display: block;
+  border-bottom: 1px solid #dedede;
+  border-top: 1px solid #dedede;
+  padding: 20px 0 10px;
+  margin: 33px 0 30px;
+}
+
+body .main .tag-content #tags-create-form .tag-table-container .add-item-row {
+  display: inline-block;
+  margin: 0 0 10px;
+}
+
+body .main .tag-content #tags-create-form .tag-table-container table {
+  margin: 0 0 10px;
+}
+
+body .main .tag-content #tags-create-form .tag-table-container table .tag-item-row td {
+  text-align: center;
+}
+
+body .main .tag-content #tags-create-form .tag-table-container table .tag-item-row td .select-product-type {
+  width: 200px;
+  margin: 6px 0 0;
+}
+
+body .main .tag-content #tags-create-form .tag-table-container table .tag-item-row td .select-city {
+  height: 35px;
+  padding: 0 10px;
+  margin: -1px auto 0 !important;
+}
+
+body .main .tag-content #tags-create-form .tag-table-container table .tag-item-row td .tag-item-select {
+  display: none;
+  width: 310px;
+  margin: 5px auto 0;
+}
+
+body .main .tag-content #tags-create-form .tag-table-container table .tag-item-row td .tag-item-order {
+  width: 40px;
+  margin: 2px 0 0;
 }

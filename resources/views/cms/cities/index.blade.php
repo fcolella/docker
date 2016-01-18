@@ -48,4 +48,3 @@
 </script>
 
 @include('cms.layouts.footer')
-

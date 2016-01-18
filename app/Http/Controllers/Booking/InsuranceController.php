@@ -26,13 +26,15 @@ class InsuranceController extends BookingController
 		parent::__construct();
 	}
 
-	//  http://viajes-laravel.dev/compra/seguros?GID=0aae559b-f84b-480e-8c88-4efab51b3c7e&RID=4
+	//  http://viajes-laravel.dev/compra/seguros?GID=0aae559b-f84b-480e-8c88-4efab51b3c7e&BID=4
 	function Index()
 	{
 		self::getParameters();
 		if (false===self::$search || false==self::$item) {
-			abort(404);
+			BookingController::displayCommons();
+			return view('booking.errors');
 		}
+
 		//
 		BookingController::displayCommons( self::$item['insuranceTotalPrices']['requestedSellingPrice']['afterTax'] );
 		//
@@ -40,7 +42,7 @@ class InsuranceController extends BookingController
 		$topYear        = self::$settings['maxAge'] - ($yearTo[0] - date('Y'));
 		//
 		self::addJsFooter('Insurance/Booking.js');
-		return view('booking.Index')
+		return view('booking.index')
 		->with([
 			'title'             => 'Comprá ON-LINE tu asistencia al viajero en '.mb_convert_case(self::$search['destination'],MB_CASE_TITLE,'UTF-8'),
 			'infoPlan'          => self::$item,
@@ -50,13 +52,13 @@ class InsuranceController extends BookingController
 			//
 			'includes'          => [
 				'main'          => [
-					'booking.Insurance.Passengers',
-					'booking.Emergency',
-					'booking.Billing',
-					'booking.Contact'
+					'booking.Insurance.passengers',
+					'booking.emergency',
+					'booking.billing',
+					'booking.contact'
 				],
 				'sidebar'       => [
-					'booking.Insurance.Information'
+					'booking.Insurance.information'
 				]
 			],
 			//  Booking steps
@@ -70,13 +72,13 @@ class InsuranceController extends BookingController
 	{
 		self::getParameters();
 		if (false===self::$search || false==self::$item) {
-			abort(404);
+			BookingController::displayCommons();
+			return view('booking.errors');
 		}
 		//  read form post data
 		BookingController::getFormData();
 		//  do the book against Gulliver
 		self::bookGet();
-#print_pre(self::$response);
 		//  Store the book into the DB
 		self::bookStore();
 	}
@@ -84,19 +86,20 @@ class InsuranceController extends BookingController
 	static function getParameters()
 	{
 		Request::setMethod('GET');
-		$gulliver_sessionId = Request::get('GID',"");
-		$database_id        = Request::get('RID',"");
-		if (""==$gulliver_sessionId) {
+		$gulliverId = Request::get('GID',"");
+		$baseId     = Request::get('BID',"");
+		if (""==$gulliverId) {
 			return false;
 		}
-		if (""==$database_id) {
+		if (""==$baseId) {
 			return false;
 		}
 		//
-		$row = InsuranceModel::where('session', $gulliver_sessionId)->where('id', $database_id)->first()->toArray();
+		$row = InsuranceModel::where('session', $gulliverId)->where('id', $baseId)->first()->toArray();
 		self::$search  = json_decode($row['search'],true);
 		self::$item    = json_decode($row['item'],true);
 		unset($row);
+		return;
 	}
 
 	static function bookGet()
@@ -169,7 +172,6 @@ class InsuranceController extends BookingController
 				]
 			]
 		];
-#print_pre( json_encode($GulliverParameters),0,1 );
 		//   For testing proposes
 		if (false==self::$testPNR) {
 			$resp = Gulliver::BookingInsurance($GulliverParameters);
@@ -192,7 +194,7 @@ class InsuranceController extends BookingController
 		if (true == empty($response['data']['success'])) {
 			return false;
 		}
-#print_pre($response, 0, 1);
+		//
 		self::$response = $response['data'];
 		unset($response);
 		return true;
@@ -215,7 +217,8 @@ class InsuranceController extends BookingController
 		$gastosFinancieros      = ceil($precioParcial * $payment->coeficiente);
 		$bonificacion           = ceil($gastosFinancieros * $payment->coef_bonif_banco);
 		$totalAmount            = ceil($precioParcial + $gastosFinancieros - $bonificacion);
-		//
+
+		//  Share variables for template renders
 		view()->share([
 			'form'              => self::$form,
 			'search'            => self::$search,
@@ -224,11 +227,7 @@ class InsuranceController extends BookingController
 			'creditCardImage'   => $payment->imagen_tarjeta,
 			'creditCardName'    => $payment->nombre_tarjeta
 		]);
-#print_pre( self::$form );
-#print_pre( self::$search );
-#print_pre( self::$response );
-#$BodyMailCompra = view('Insurance/compra-ok')->render();
-#print_r($BodyMailCompra);die();
+
 		//  Prepare data for store in 'payment_product_data'
 		$payment_product_data   = [
 			'typeProd'          => 'INSURANCE',

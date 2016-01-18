@@ -162,7 +162,7 @@ class BookingController extends Controller
 	//  Cuotas sin interes
 	static function getInstallmentsWOinterest()
 	{
-		$Installments = (array) DB::select('SELECT cantidad_cuotas FROM cuotas WHERE coeficiente = 0 AND cantidad_cuotas != 1 AND banco_id != 15 GROUP BY cantidad_cuotas ORDER BY cantidad_cuotas DESC ');
+		$Installments = DB::select('SELECT cantidad_cuotas FROM cuotas WHERE coeficiente = 0 AND cantidad_cuotas != 1 AND banco_id != 15 GROUP BY cantidad_cuotas ORDER BY cantidad_cuotas DESC');
 		//
 		$options=[];
 		foreach ($Installments as $Installment) {
@@ -174,7 +174,7 @@ class BookingController extends Controller
 	//  Cuotas con interes
 	static function getInstallmentsWinterest()
 	{
-		$Installments = (array) DB::select('SELECT cantidad_cuotas FROM cuotas WHERE cantidad_cuotas != 1 AND coeficiente != 0 AND banco_id != 15  GROUP BY cantidad_cuotas ORDER BY cantidad_cuotas DESC ');
+		$Installments = DB::select('SELECT cantidad_cuotas FROM cuotas WHERE cantidad_cuotas != 1 AND coeficiente != 0 AND banco_id != 15 GROUP BY cantidad_cuotas ORDER BY cantidad_cuotas DESC');
 		$options=[];
 		foreach ($Installments as $Installment) {
 			$options[] = self::getPaymentOptions($Installment->cantidad_cuotas, false, false);
@@ -189,7 +189,7 @@ class BookingController extends Controller
 		if (defined('uatpAirlineCode')) {
 			$whereAmount = " AND cantidad_cuotas != 1 ";
 		}
-		$Installments = (array) DB::select('SELECT cantidad_cuotas FROM cuotas WHERE  banco_id = 15 '.$whereAmount.' GROUP BY cantidad_cuotas ORDER BY cantidad_cuotas ASC ');
+		$Installments = DB::select('SELECT cantidad_cuotas FROM cuotas WHERE banco_id = 15 '.$whereAmount.' GROUP BY cantidad_cuotas ORDER BY cantidad_cuotas ASC');
 		$options=[];
 		foreach ($Installments as $Installment) {
 			$options[] = self::getPaymentOptions($Installment->cantidad_cuotas, false, true);
@@ -213,29 +213,76 @@ class BookingController extends Controller
 
 		if ($interest == true && $all == false) {
 			$coefficient = ' AND C.coeficiente = 0';
-			$bankId = ' AND banco_id != 15';
+			$bankId = ' AND C.banco_id != 15';
 		} elseif ($interest == false && $all == false) {
 			$coefficient = ' AND C.coeficiente != 0';
-			$bankId = ' AND banco_id != 15';
+			$bankId = ' AND C.banco_id != 15';
 		} else {
 			$coefficient = '';
-			$bankId = ' AND banco_id = 15';
+			$bankId = ' AND C.banco_id = 15';
 		}
+
 		//
-		$rowsBanks = DB::select('SELECT B.nombre, C.banco_id , B.imagen , B.sps FROM bancos B JOIN cuotas C ON C.banco_id = B.id WHERE C.cantidad_cuotas = '.$sharesAmount.$coefficient.$bankId.' GROUP BY C.banco_id ORDER BY B.orden');
+		$rows = DB::select('SELECT
+								B.nombre as bank_name, B.imagen as banck_img, B.sps,
+								T.nombre as card_name, T.cod_decidir, T.imagen as card_img,
+								C.tarjeta_codigo, C.banco_id, C.coeficiente
+							FROM
+								bancos B
+							LEFT JOIN
+								cuotas C ON C.banco_id = B.id
+							LEFT JOIN
+								tarjetas T ON T.codigo = C.tarjeta_codigo
+							WHERE
+								C.cantidad_cuotas='.$sharesAmount.$coefficient.$bankId.'
+							GROUP BY
+								C.banco_id, C.tarjeta_codigo
+							ORDER BY
+								B.orden');
+		//
+		$banco_id = $rows[0]->banco_id;
+		$creditCards = [];
+		foreach($rows as $key => $item) {
+			if ($banco_id != $item->banco_id) {
+				$creditCards=[];
+				$banco_id = $item->banco_id;
+			};
+			//
+			$creditCards[$item->tarjeta_codigo] = [
+				'nombre'    => $item->card_name,
+				'code'      => $item->cod_decidir,
+				'coef'      => $item->coeficiente,
+				'img'       => $item->card_img
+			];
+			$PaymentOption['paymentCombo'][$item->banco_id] = [
+				'banco'=>[
+					'banco_id'      => $item->banco_id,
+					'banco_imagen'  => str_replace('img/',"",$item->banck_img),
+					'nombre'        => $item->bank_name,
+					'sps'           => $item->sps,
+					'tarjetas'      => array_values($creditCards)
+				]
+			];
+		}
+		$PaymentOption['paymentCombo'] = array_values($PaymentOption['paymentCombo']);
+/**
+
+#print_pre('SELECT B.nombre, B.imagen, B.sps, C.banco_id FROM bancos B LEFT JOIN cuotas C ON C.banco_id = B.id WHERE C.cantidad_cuotas = '.$sharesAmount.$coefficient.$bankId.' GROUP BY C.banco_id ORDER BY B.orden');
+		$rowsBanks = DB::select('SELECT B.nombre, B.imagen, B.sps, C.banco_id FROM bancos B LEFT JOIN cuotas C ON C.banco_id = B.id WHERE C.cantidad_cuotas = '.$sharesAmount.$coefficient.$bankId.' GROUP BY C.banco_id ORDER BY B.orden');
 		//
 		foreach($rowsBanks as $bank)
 		{
-			$rowsCreditCards = DB::select('SELECT T.nombre, T.cod_decidir, C.coeficiente, T.imagen  FROM tarjetas T JOIN cuotas C ON T.codigo = C.tarjeta_codigo WHERE C.banco_id = '.$bank->banco_id.' AND C.cantidad_cuotas ='.$sharesAmount.$coefficient.' GROUP BY C.tarjeta_codigo');
+#print_pre('SELECT T.nombre, T.cod_decidir, T.imagen, C.coeficiente FROM tarjetas T LEFT JOIN cuotas C ON T.codigo = C.tarjeta_codigo WHERE C.banco_id = '.$bank->banco_id.' AND C.cantidad_cuotas ='.$sharesAmount.$coefficient.' GROUP BY C.tarjeta_codigo');
+			$rowsCreditCards = DB::select('SELECT T.nombre, T.cod_decidir, T.imagen, C.coeficiente FROM tarjetas T LEFT JOIN cuotas C ON T.codigo = C.tarjeta_codigo WHERE C.banco_id = '.$bank->banco_id.' AND C.cantidad_cuotas ='.$sharesAmount.$coefficient.' GROUP BY C.tarjeta_codigo');
 			$creditCards= [];
 			//
 			foreach($rowsCreditCards as $key => $item) {
-				$creditCards[$key]['nombre']   =  $item->nombre;
-				$creditCards[$key]['code']     =  $item->cod_decidir;
-				$creditCards[$key]['coef']     =  $item->coeficiente;
-				$creditCards[$key]['img']      =  $item->imagen;
+				$creditCards[$key]['nombre']= $item->nombre;
+				$creditCards[$key]['code']  = $item->cod_decidir;
+				$creditCards[$key]['coef']  = $item->coeficiente;
+				$creditCards[$key]['img']   = $item->imagen;
 			}
-			$PaymentOption['paymentCombo'][]=[
+			$PaymentOption['paymentCombo'][]= [
 				'banco'=>[
 					'banco_id'              => $bank->banco_id,
 					'banco_imagen'          => str_replace('img/',"",$bank->imagen),
@@ -245,6 +292,8 @@ class BookingController extends Controller
 				]
 			];
 		}
+**/
+#print_pre($PaymentOption);
 		return (object) $PaymentOption;
 	}
 
@@ -262,7 +311,7 @@ class BookingController extends Controller
 
 	static function getCardCode($cod_decidir=0)
 	{
-		$cardCode = DB::select( 'SELECT
+		$cardCode = DB::select('SELECT
 									codigo
 								FROM
 									tarjetas
@@ -274,14 +323,14 @@ class BookingController extends Controller
 		}
 		return $cardCode[0]->codigo;
 	}
-	static function getCardName($id=0)
+	static function getCardName($cod_decidir=0)
 	{
 		$cardName = DB::select('SELECT
 									nombre
 								FROM
 									tarjetas
 								WHERE
-									id = ' . $id
+									cod_decidir = '.$cod_decidir
 		);
 		if (true == empty($cardName[0]->nombre)) {
 			return "";
@@ -310,7 +359,6 @@ class BookingController extends Controller
 		self::$form = Request::all();
 #print_pre(self::$form);
 		//  Small helpers
-		self::$form['selectedBank'] = (self::$form['selectedBank'] == 'Otros Bancos') ? self::$form['selectedBank'] : 'Banco '.self::$form['selectedBank'];
 
 		$dataPago                   = explode('-', self::$form['data-pago']);
 		self::$form['data-pago']    = [
@@ -319,6 +367,9 @@ class BookingController extends Controller
 			'cuotas'                => (false==empty($dataPago[2])) ? $dataPago[2] : 0,
 			'banco'                 => (false==empty($dataPago[3])) ? $dataPago[3] : 0
 		];
+		self::$form['selectedCard'] = self::getCardName(self::$form['data-pago']['tarjeta']);
+		self::$form['selectedBank'] = self::getBankName(self::$form['data-pago']['banco']);
+		self::$form['selectedBank'] = (self::$form['selectedBank'] == 'Otros Bancos') ? self::$form['selectedBank'] : 'Banco '.self::$form['selectedBank'];
 		self::$form['ownCredit']    = (env('CREDITO_GARBARINO_ID') == self::$form['data-pago']['banco']) ? 1 : 0;
 #print_pre(self::$form,0,0);
 		/**
@@ -390,7 +441,7 @@ class BookingController extends Controller
 		$typeProd       = $payment_product_data['typeProd'];
 		//
 		PaymentProductDataModel::setData($payment_product_data);
-		unset($payment_product_data);
+
 		$payment_product_data_id = PaymentProductDataModel::store($bookingId);
 
 		//
@@ -428,12 +479,10 @@ class BookingController extends Controller
 			'fecha_pago'                => \date("Y-m-d H:i:s"),
 			'rate'                      => ''
 		]);
-		unset($payment_gateway_data);
 		$payment_gateway_data_id = PaymentGatewayDataModel::store($bookingId);
 
 		//
 		PaymentGulliverDataModel::setData($payment_gulliver_data);
-		unset($payment_gulliver_data);
 		$payment_gulliver_data_id = PaymentGulliverDataModel::store($bookingId);
 
 		// credito propio banco_id = 3
@@ -467,6 +516,7 @@ class BookingController extends Controller
 			}
 			self::GarbarinoCredit($bookingId,$startDate,$clientName);
 		}
+		unset($payment_product_data,$payment_gateway_data,$payment_gulliver_data);
 
 		return [
 			'payment_product_data_id'   => $payment_product_data_id,

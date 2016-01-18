@@ -53,7 +53,7 @@ var InsuranceRow;
 function Grid_Success() {
 
 	var Insuranceform = $('form[name="form-seguros"]');
-		Insuranceform.find('h2.row:first').append('<span class="SlideArrowUp pull-right">▲</span>').append('<span class="SlideArrowDown pull-right hidden" style="display: inline;"> ▼</span>');
+		Insuranceform.find('h2.row:first').append('<span class="SlideArrowDown pull-right "> ▼</span>').append('<span class="SlideArrowUp pull-right hidden">▲</span>');
 	InsuranceRow = Insuranceform.find('div.row:first');
 	InsuranceRow.addClass('hidden');
 	$('.SlideArrowUp, .SlideArrowDown, .toggle-search, h2.row:first').on('click',function(e){

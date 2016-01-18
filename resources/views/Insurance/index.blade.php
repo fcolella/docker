@@ -8,7 +8,7 @@
 					<div class="widget-busqueda-wrap" @if (empty($HomeSearchSliders))style="position:relative" @endif>
 						 <div class="tab-content">
 						    <div id="paquetes" class="tab-pane fade active in" role="tabpanel">
-							@include('layouts.insurance.search')
+							@include('Insurance.search')
 							</div>
 						</div>
 					</div>
@@ -17,19 +17,19 @@
 			</div>
 		</div>
 	@if (!empty($HomeSearchSliders))
-		@include('layouts.widgets.SearchSliders')
+		@include('layouts.widgets.searchSliders')
 	@endif
 	</div>
 
 	@if (!empty($BanksSliders))
-		@include('layouts.widgets.BanksSliders')
+		@include('layouts.widgets.banksSliders')
 	@endif
 
 	<div class="main-content">
 		<div class="container">
 			<span class="clear margen">&nbsp;</span>
 			@if (!empty($DestinationsSliders))
-				@include('layouts.widgets.DestinationsSliders')
+				@include('layouts.widgets.destinationsSliders')
 			@endif
 		</div>
 	</div>

@@ -21,7 +21,7 @@ class Gulliver extends Controller
 	protected	static $encoding = 'gzip';
 
 	protected   static $addressVersion = 'v3.8';
-	protected   static $flightsVersion = 'v3.8';
+	protected   static $flightsVersion = 'v3.5';
 	protected   static $insurancesVersion = 'latest';
 
 	static function init()
@@ -50,7 +50,7 @@ class Gulliver extends Controller
 	 *
 	 * @param string $service
 	 * @param string $method
-	 * @param array $data
+	 * @param array $parameters
 	 * @return array|bool
 	 */
 	static function call($service="",$method="", $parameters=[], $type='get')
@@ -90,6 +90,7 @@ class Gulliver extends Controller
 			$response = json_decode($resp, true);
 #dd(['response'=>$response,'method'=>$method]);
 			//	Check for json error
+
 			if (json_last_error() != JSON_ERROR_NONE)
 			{
 				self::$error = 'json error: '.json_last_error().'<br>'.print_pre($resp);
@@ -125,7 +126,7 @@ class Gulliver extends Controller
 			//	Cache Store ?
 			if (0 < self::$cache_ttl)
 			{
-				$name = Cache::put(self::$cache_name, $response, self::$cache_ttl);
+				Cache::put(self::$cache_name, $response, self::$cache_ttl);
 			}
 		}
 		//
@@ -141,7 +142,7 @@ class Gulliver extends Controller
 	 * @param string $cityCode
 	 * @return mixed
 	 */
-	static function getCities($countryCode="",$stateCode="",$cityCode="")
+	static function getCitiesBooking($countryCode="",$stateCode="",$cityCode="")
 	{
 		$parameters = [];
 		//	Data set ?
@@ -160,7 +161,7 @@ class Gulliver extends Controller
 	 * @param string $stateCode
 	 * @return mixed
 	 */
-	static function getStates($countryCode="",$stateCode="")
+	static function getStatesBooking($countryCode="",$stateCode="")
 	{
 		$parameters = [];
 		//	Data set ?
@@ -188,7 +189,7 @@ class Gulliver extends Controller
 	 * @param string $requestedCurrency
 	 * @return mixed
 	 */
-	static function getFlightsOffers($validDate="",$origin="",$destination="",$departureFrom="",$departureTo="",$paxQuantity="",$limitPriceCurrency="",$limitPriceAmount="",$requestedCurrency="")
+	static function getFlightsOffers($validDate="",$origin="",$destination="",$departureFrom="",$departureTo="",$paxQuantity="",$limitPriceCurrency="",$limitPriceAmount="",$requestedCurrency="ARS")
 	{
 		$parameters = [];
 		//	Data set ?

@@ -1,5 +1,5 @@
 
-<div class="row">
+<div class="row slider-destinos">
 	<div id="slider-buttons">
 		<div class="col-sm-12 top margen">
 			<input type="hidden" class="itemsQty" value="4"/>

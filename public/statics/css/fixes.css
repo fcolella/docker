@@ -5,6 +5,13 @@ header a:focus, aside a:focus, footer a:focus, header a:hover, aside a:hover, fo
 .navbar-garbarino {margin-bottom:0;background-color:#04a6e4;border:1px solid transparent}
 .navbar-garbarino .navbar-nav > li > a {color:#fff}
 
+#main-slider .owl-next {right:-81px}
+.slider-destinos .owl-carousel {width:99%}
+.slider-destinos .owl-theme .owl-controls {width:100%}
+.slider-destinos .slider-buttons .owl-next {right:15px}
+
+.slider-bancos {background-color:#fff}
+
 /** Grid - Start **/
 .spinner {margin:30px auto 30px;width:70px;text-align:center}
 .spinner > div {width:18px;height:18px;background-color:#04a6e4;border-radius:100%;display:inline-block;-webkit-animation:sk-bouncedelay 1.4s infinite ease-in-out both;animation:sk-bouncedelay 1.4s infinite ease-in-out both}

@@ -31,7 +31,7 @@
 				@endif
 				<div class="price-title">Precio Total Final</div>
 				<span class="price-currency">{{ $plan['insuranceTotalPrices']['requestedSellingPrice']['currency'] }}</span>
-				<span class="price-amount">{{ ceil($plan['insuranceTotalPrices']['requestedSellingPrice']['afterTax']) }}</span>
+				<span class="price-amount">{{ amountFormat($plan['insuranceTotalPrices']['requestedSellingPrice']['afterTax'],0) }}</span>
 				<div class="actions">
 					<a href="{{ $plan['booking'] }}" class="btn btn-block btn-info">Comprar</a>
 				</div>

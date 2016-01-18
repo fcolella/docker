@@ -4,9 +4,9 @@
 		<div class="container container_12">
 			<h1 class="title">Asistencia al viajero en {{ mb_convert_case($InsuranceSearch['destination'],MB_CASE_TITLE,'UTF-8') }}</h1>
 			<div class="row" id="content">
-@if (empty($InsuranceErrors))
-				@include('layouts.insurance.Loader')
-@endif
+			@if (empty($InsuranceErrors))
+				@include('Insurance.loader')
+			@endif
 				<div class="result-title">
 					<div class="col-md-9">
 						Argentina - {{ mb_convert_case($InsuranceSearch['destination'],MB_CASE_TITLE,'UTF-8') }} | Desde: {{ date('d/m/Y', strtotime($InsuranceSearch['dateFrom'] )) }} | Hasta: {{ date('d/m/Y', strtotime($InsuranceSearch['dateTo'] )) }} | Pasajeros: {{ implode(' años, ',$InsuranceSearch['passengers']) }} años |
@@ -23,34 +23,33 @@
 								<div class="widget-busqueda-wrap">
 									<div class="tab-content">
 										<div role="tabpanel" class="tab-pane fade active in" id="insurance">
-											@include('layouts.insurance.search')
+											@include('Insurance.search')
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 					<div class="row secundary clearfix">
 						<div class="col-md-12">
 							<h3 class="bordeInf">Otras Regiones</h3>
 							<ul class="zonas">
 							@foreach($InsuranceZones as $zone)
-								<li><a title="Asistencia al viajero en {{ mb_convert_case($zone,MB_CASE_TITLE,'UTF-8') }}" href="{{ url() }}/zona.php?destino={{ mb_convert_case($zone,MB_CASE_TITLE,'UTF-8') }}">{{ mb_convert_case($zone,MB_CASE_TITLE,'UTF-8') }}</a></li>
+								<li><a title="Asistencia al viajero en {{ mb_convert_case($zone,MB_CASE_TITLE,'UTF-8') }}" href="{{ url('seguros') }}/zonas?destino={{ mb_convert_case($zone,MB_CASE_TITLE,'UTF-8') }}">{{ mb_convert_case($zone,MB_CASE_TITLE,'UTF-8') }}</a></li>
 							@endforeach
 							</ul>
 							<div class="clearfix"></div>
 							<h3 class="bordeInf">Preguntas Frecuentes</h3>
 							<ul>
-								<li><a href="{{ url() }}/index.php#questionA">¿Por qué contratar un servicio de asistencia al viajero?</a></li>
-								<li><a href="{{ url() }}/index.php#questionB">¿Qué es una Asistencia al Viajero?</a></li>
+								<li><a href="{{ url('seguros') }}#questionA">¿Por qué contratar un servicio de asistencia al viajero?</a></li>
+								<li><a href="{{ url('seguros') }}#questionB">¿Qué es una Asistencia al Viajero?</a></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 
 				<div class="content col-md-8">
-@if (!empty($InsuranceErrors))
+				@if (!empty($InsuranceErrors))
 					<div id="result-error" class="loading-result">
 						<h2 class="title primary">Oops !!</h2>
 					@foreach($InsuranceErrors as $Error)
@@ -58,11 +57,10 @@
 					@endforeach
 						<p>Por favor intentá una nueva busqueda</p>
 					</div>
-@else
-					@include('layouts.insurance.Errors')
-
+				@else
+					@include('Insurance.errors')
 					<section class="result-list" role="product-list" data-source="{{ $InsuranceGridUri }}"></section>
-@endif
+				@endif
 				</div>
 			</div>
 		</div>

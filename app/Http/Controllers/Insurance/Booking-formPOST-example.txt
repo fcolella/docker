@@ -1,6 +1,23 @@
+
+2 Pasajeros             ARS 1.555
+Impuestos y gastos      ARS 65
+
+Total                   ARS 1.620
+
+/////////////////////////////////////////////////
+
+2 Pasajeros             ARS 1.555
+Impuestos y gastos      ARS 65
+Gastos financieros      ARS 486.00
+Bonificación promoción  ARS -243.00
+
+Total                   ARS 1,863.00
+
+/////////////////////////////////////////////////
+
 Array
 (
-    [TotalAmount] => 162.06
+    [TotalAmount] => 1619.83
     [selectedBank] => Banco
     [data-pago] => Array
         (
@@ -10,9 +27,9 @@ Array
             [banco] => 2
         )
 
-    [precioFinal] => 187
-    [intereses] => 49
-    [bonificacion] => 25
+    [precioFinal] => 1863
+    [intereses] => 486
+    [bonificacion] => 243
     [maxCargosGestion] => 0
     [descCargosGestion] => 0
     [coefDescuento] => 0
@@ -30,6 +47,17 @@ Array
                     [anio_nac] => 1970
                     [tipoDocumento] => DNI
                     [numeroDocumento] => 1234567891
+                )
+
+            [1] => Array
+                (
+                    [nombre] => Test 2
+                    [apellido] => Pasajero 2
+                    [dia_nac] => 2
+                    [mes_nac] => 2
+                    [anio_nac] => 1972
+                    [tipoDocumento] => DNI
+                    [numeroDocumento] => 1234567892
                 )
 
         )
@@ -58,11 +86,12 @@ Array
     [telefono] => 4787-7077
     [comentarios] => PRUEBA DESDE DESARROLLO
     [condiciones] => on
-    [GID] => e27c6ea3-05b8-4618-8a83-9e1e6ecec37e
-    [RID] => 61
+    [GID] => e4e39335-f981-4289-affb-149650b6ea2a
+    [RID] => 76
     [tester] => tester
+    [ownCredit] => 0
 )
 
-Called from the file: /Users/gabrielvazquez/Sites/viajes/app/Http/Controllers/Booking/InsuranceController.php, Line: 216
+Called from the file: /Users/gabrielvazquez/Sites/viajes/app/Http/Controllers/Booking/InsuranceController.php, Line: 228
 
 End.

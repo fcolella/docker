@@ -1,3 +1,5 @@
+body {background-color:#f1f1f1;color:#3c3c3b;font-family:Arial,sans-serif;font-size:12px}
+body>.container {margin-bottom:10px}
 
 .btn.booking_up            { padding:0 2px;width:auto !important;z-index:100;position:fixed;bottom:10px;left:10px; border-radius:5px;font-size:18px;font:18px/28px; }
 .btn.booking_autocompletar { padding:0 6px;width:auto !important;z-index:100;position:fixed;bottom:10px;left:27px; border-radius:5px;font-size:12px; }

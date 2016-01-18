@@ -1,7 +1,7 @@
 @include('cms.layouts.header')
 	<div class="cms-title-container">
 		<h1>Edit Region</h1>
-		<div class="btn btn-primary regions-edit-submit">Save</div>
+		<div class="btn btn-success cms-btn-submit">Save</div>
 	</div>
 	<div class="cms-message-container">
 		@if(count($errors) > 0)
@@ -18,36 +18,40 @@
 		{!! Form::open(array('route' => array('regions.update', $region->id), 'id' => 'regions-edit-form')) !!}
 
 			<div class="form-group">
-				{!! Form::text('name', $region->name, array('class' => 'form-control', 'autocomplete' => 'off', 'required' => 'required')) !!}
+				{!! Form::text('name', $region->name, array('class' => 'form-control', 'autocomplete' => 'off')) !!}
 			</div>
 
 			<div class="regions-selected-countries">
-				@foreach($countries as $country)
-					@if($filtered_country_list->contains($country->code))
-						<div id="countrySelected_{{ $country->code }}" class="regions-selected-country btn btn-primary">{{ $country->name }}<span class="glyphicon glyphicon-remove"></span></div>
-					@endif
-				@endforeach
+				@if($countries != '')
+					@foreach($countries as $country)
+						@if($filtered_country_list->contains($country->code))
+							<div id="countrySelected_{{ $country->code }}" class="regions-selected-country btn btn-primary">{{ $country->name }}<span class="glyphicon glyphicon-remove"></span></div>
+						@endif
+					@endforeach
+				@endif
 			</div>
 
 			<div class="form-group">
-				@foreach($countries_ordered_list as $letter => $ordered_countries)
-					<div class="region-country-group">
-						<span><h3>{{ $letter }}</h3></span>
-						@foreach($ordered_countries as $country)
-							<div class="country_item">
-								{!! Form::checkbox('countries[]', $country->code, $filtered_country_list->contains($country->code), ['class' => 'field', 'id' => 'country_'.$country->code, 'autocomplete' => 'off', 'required' => 'required']) !!}
-								@if($filtered_country_list->contains($country->code))
-									{!! Form::label($country->name, $country->name, array('class' => 'label-bold')) !!}
-								@else
-									{!! Form::label($country->name, $country->name) !!}
-								@endif
-							</div>
-						@endforeach
-					</div>
-				@endforeach
+				@if($countries_ordered_list != '')
+					@foreach($countries_ordered_list as $letter => $ordered_countries)
+						<div class="region-country-group">
+							<span><h3>{{ $letter }}</h3></span>
+							@foreach($ordered_countries as $country)
+								<div class="country_item">
+									{!! Form::checkbox('countries[]', $country->code, $filtered_country_list->contains($country->code), ['class' => 'field', 'id' => 'country_'.$country->code, 'autocomplete' => 'off']) !!}
+									@if($filtered_country_list->contains($country->code))
+										{!! Form::label($country->name, $country->name, array('class' => 'label-bold')) !!}
+									@else
+										{!! Form::label($country->name, $country->name) !!}
+									@endif
+								</div>
+							@endforeach
+						</div>
+					@endforeach
+				@endif
 			</div>
 
-			<div class="btn btn-primary regions-edit-submit">Save</div>
+			<div class="btn btn-success cms-btn-submit">Save</div>
 
 		{!! Form::close() !!}
 
@@ -63,7 +67,7 @@
 
 				$('.region-content [name="name"]').focus();
 
-				$('.regions-edit-submit').click(function(){
+				$('.cms-btn-submit').click(function(){
 					var name = $("input[name='name']").val().length;
 					var checkbox = $("input[name='countries[]']:checked").length;
 
@@ -80,6 +84,8 @@
 							var error = $('<li />', { text : 'The countries field is required.', "class" : 'error-checkbox' });
 							$('.cms-message-container .bg-danger ul').append(error);
 						}
+
+						$('html, body').animate({ scrollTop: 0 }, 'slow');
 
 						return false;
 					}else{

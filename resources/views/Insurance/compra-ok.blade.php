@@ -45,7 +45,7 @@
 	        @endif
 
 			@foreach($form['traveler'] as $key => $pax)
-	            <span class="grid_8 blue top"><b>Pasajero {{ $key }}}</b></span>
+	            <span class="grid_8 blue top"><b>Pasajero {{ $key }}</b></span>
 	            <div class="pasajero ui-corner-all grid_6">
 	                <ul>
 	                    <li>Nombre y Apellido: <span class="blue">{{ $pax['nombre'] }} {{ $pax['apellido'] }}</span></li>

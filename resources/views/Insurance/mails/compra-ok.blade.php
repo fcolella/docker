@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<div style="font-family: arial; width:900px; color:#333">
+	<div style="font-family:Arial, Helvetica, sans-serif; width:900px; color:#333">
 	<table>	
 		<tr>
 			<td width="700" align="center">
@@ -330,7 +330,6 @@ $currency   = $product['purchasedPlans'][0]['insuranceTotalPrices']['requestedPr
                                 <td>
                                     <b>Total</b>
                                 </td>
-
                                 <td id="totalTD">
                                     <b>{{ $currency }} {{ amountFormat($totalAmount,0) }}</b>
                                 </td>

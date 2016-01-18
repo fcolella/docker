@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @todo purge results from db
+**/
 namespace App\Http\Controllers\Insurance;
 
 use App\Http\Controllers\Controller;
@@ -19,6 +21,7 @@ use App\Http\Controllers\Insurance\InsuranceModel;
  */
 class InsuranceController extends Controller
 {
+	//  Settings
 	protected static $enabled = true;
 	private static $config = [
 		'cookieName'		=> 'IS',
@@ -27,9 +30,15 @@ class InsuranceController extends Controller
 		'maxdate'			=> '+12m', 	//	months
 		'maxPassengers'     => 9,
 		'maxAge'			=> 86,
-		'pagination'		=> 10
+		'pagination'		=> 10,
+		//  Zoneslanding
+		'delay'             => 3,
+		'duration'          => 21,      //  Cantidad de dias que se muestra al cliente
 	];
 
+	/**
+	 *
+	**/
 	function __construct()
 	{
 	//	$form = Request::all(); print_pre($form,0,0);
@@ -37,29 +46,26 @@ class InsuranceController extends Controller
 			return redirect(URL::to('/'),302)->send();
 		}
 		parent::__construct();
-		//
+		//  Add css and js
 		if (false==Request::ajax()) {
 			Controller::addCss('Insurance/stylesheet.css');
 			Controller::addJsFooter('lib/jquery.validate.js');
 			Controller::addJsFooter('Insurance/SearchBox.js');
 		}
-		//
+		//  get search zones from Gulliver
 		$availableGeoZones = Gulliver::getInsurancesFilters();
-		$availableGeoZones = (false==empty($availableGeoZones['availableGeoZones'])) ? $availableGeoZones['availableGeoZones'] : [];
-
-		//
+		//  Common search form
 		view()->share([
 			'InsuranceSearch'	    => Cookie::get(self::$config['cookieName']),
-			'InsuranceZones'	    => $availableGeoZones,
-
-			'HomeSearchSliders'		=> Controller::getSearchSliders('insurance'),
-			'BanksSliders'			=> Controller::getBanks('slider'),
-			'DestinationsSliders'	=> Controller::getDestinations('slider'),
-			'InsuranceConfig'	    => self::$config
+			'InsuranceZones'	    => (false==empty($availableGeoZones['availableGeoZones'])) ? $availableGeoZones['availableGeoZones'] : [],
+			'InsuranceConfig'       => self::$config
 		]);
+		unset($availableGeoZones);
 	}
 
-	//
+	/**
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	**/
 	public function index()
 	{
 		self::addJsFooter('jquery/jquery.colorbox-min.js');
@@ -68,10 +74,137 @@ class InsuranceController extends Controller
 		self::addJsFooter('main.js');
 		return view(
 			'Insurance/index'
-		);
+		)->with([
+			'HomeSearchSliders'     => Controller::getSearchSliders('insurance'),
+			'BanksSliders'			=> Controller::getBanks('slider'),
+			'DestinationsSliders'	=> Controller::getDestinations('slider')
+		]);
 	}
 
-	//
+	/**
+	 *
+	**/
+	public function zones()
+	{
+		$availableGeoZones = Gulliver::getInsurancesFilters();
+		if (true == empty($availableGeoZones['availableGeoZones'])) {
+			return redirect('/seguros')->send();
+		}
+		//
+		$destiny = $gulliverDestiny = Request::get('destino', "");
+		if ('All' == $destiny || "" == $destiny) {
+			$duration = 15;
+			$gulliverDestiny = 'America';
+		} else if ('Argentina' == $destiny) {
+			$duration = 7;
+		} else {
+			$duration = self::$config['duration'];
+		}
+		$today      = new \DateTime();
+		$dateFrom   = $today->add(new \DateInterval('P' . (self::$config['delay']) . 'D'))->format('Y-m-d');
+		$dateTo     = $today->add(new \DateInterval('P' . ($duration - 1) . 'D'))->format('Y-m-d');
+		//
+		$response = Gulliver::getInsuranceAvailability([
+			'origin' => 'BUE',
+			'destination' => mb_convert_case($gulliverDestiny, MB_CASE_TITLE),
+			'dateFrom' => $dateFrom,
+			'dateTo' => $dateTo,
+			'passengers' => '1',
+			'currency' => 'ARS'
+		]);
+		//
+		if (false == $response || true == empty($response['availablePlans'])) {
+			return redirect('/seguros')->send();
+		}
+		//
+		switch ($destiny) {
+			case 'Europa':
+				$zoneData = [
+					'image' => 'seguros/europa.jpg',
+					'title' => 'Europa',
+					'text'  => 'Desde el 2001 se encuentra en vigencia el "Tratado Schengen" que estipula la necesidad de contar con un seguro de viaje
+								para poder ingresar a los 28 paises que lo componen (Alemania, Austria, Bélgica, Bulgaria, Chipre, Dinamarca, Eslovaquia,
+								Eslovenia, España, Estonia, Finlandia, Francia, Grecia, Holanda, Hungría, Islandia, Italia, Letonia, Lituania, Luxemburgo,
+								Malta, Noruega, Polonia, Portugal, República Checa, Rumania, Suecia y Suiza).'
+				];
+			break;
+			case 'Argentina';
+				$zoneData = [
+					'image' => 'seguros/argentina.jpg',
+					'title' => 'Argentina',
+					'text'  => 'Ante eventuales problemas de salud, pérdida de equipaje, pasaporte o documentos, un simple llamado telefónico pone en
+								funcionamiento el m&aacute;s avanzado sistema de asistencias para solucionar todos los inconvenientes.
+								Disfrutá de tu viaje con la tranquilidad de viajar seguro.'
+				];
+			break;
+			case 'Asia':
+				$zoneData = [
+					'image' => 'seguros/asia.jpg',
+					'title' => 'Asia',
+					'text'  => 'Viajá seguro con nuestra garantía de confianza. Ante eventuales problemas de salud, pérdida de equipaje, pasaporte o
+								documentos, un simple llamado telefónico pone en funcionamiento el más avanzado sistema de asistencias para solucionar todos
+								los inconvenientes.
+								Disfrutá de tu viaje con la tranquilidad de viajar seguro.'
+				];
+			break;
+			case 'Africa':
+				$zoneData = [
+					'image' => 'seguros/africa.jpg',
+					'title' => 'Africa',
+					'text'  => 'Viajá seguro con nuestra garantía de confianza. Ante eventuales problemas de salud, pérdida de equipaje, pasaporte o
+								documentos, un simple llamado telefónico pone en funcionamiento el más avanzado sistema de asistencias para solucionar todos
+								los inconvenientes.
+								Disfrutá de tu viaje con la tranquilidad de viajar seguro.'
+				];
+			break;
+			case 'America':
+				$zoneData = [
+					'image' => 'seguros/america.jpg',
+					'title' => 'América',
+					'text'  => 'Viajá seguro con nuestra garantía de confianza. Ante eventuales problemas de salud, pérdida de equipaje, pasaporte o
+								documentos, un simple llamado telefónico pone en funcionamiento el más avanzado sistema de asistencias para solucionar todos
+								los inconvenientes.
+								Disfrutá de tu viaje con la tranquilidad de viajar seguro.'
+				];
+			break;
+			default:
+				$zoneData = [
+					'image' => 'seguros/otros.png',
+					'title' => "Cualquier lugar del mundo",
+					'text'  => 'Viajá seguro con nuestra garantía de confianza. Ante eventuales problemas de salud, pérdida de equipaje, pasaporte o
+								documentos, un simple llamado telefónico pone en funcionamiento el más avanzado sistema de asistencias para solucionar todos
+								los inconvenientes.
+								Disfrutá de tu viaje con la tranquilidad de viajar seguro.'
+				];
+			break;
+		}
+		//
+		$Plans = [];
+		foreach ($response['availablePlans'] as $key_plan => $plan) {
+			$Plans['insurancePlan'][] = array_merge($plan['insurancePlan'],[
+				'duration'      => $duration,
+				'currency'      => $plan['insuranceTotalPrices']['requestedSellingPrice']['currency'],
+				'afterTax'      => $plan['insuranceTotalPrices']['requestedSellingPrice']['afterTax']
+			]);
+			foreach($plan['coverages'] as $key_coverage => $coverage) {
+				$Plans['coverages'][ $coverage['coverage']['code'] ][] = [
+					'name'      => $coverage['coverage']['name'],
+					'detail'    => $coverage['detail']
+				];
+			}
+		}
+		//
+		Controller::$route = 'insurance-results';
+		return view('Insurance/landing-zones')
+		->with([
+			'Plans'     => $Plans,
+			'zoneData'  => $zoneData,
+		]);
+	}
+
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	**/
 	public function search()
 	{
 		Request::setMethod('POST');
@@ -88,7 +221,9 @@ class InsuranceController extends Controller
 		return redirect($redirect)->send();
 	}
 
-	//
+	/**
+	 * @return $this
+	**/
 	public function results()
 	{
 		$parameters = self::validateParams();
@@ -105,7 +240,9 @@ class InsuranceController extends Controller
 		]);
 	}
 
-	//
+	/**
+	 * @return mixed
+	**/
 	public function grid()
 	{
 		$EncryptedSearch = Request::get('search',"");
@@ -127,7 +264,6 @@ class InsuranceController extends Controller
 			'passengers'		=> (true==is_array($search['passengers'])) ? implode(',',$search['passengers']) : $search['passengers'],
 			'currency'			=> 'ARS'
 		]);
-
 		if (false==$response) {
 			return Response::json(['error'=>true,'description'=>Gulliver::$error],412);
 		}
@@ -144,17 +280,10 @@ class InsuranceController extends Controller
 				'item'           => json_encode($response[$key]),
 				'search'         => json_encode($search)
 			]);
-		/**
-			//  http://viajes-laravel.dev/seguros/compra/?GID=71ff1103-d3c6-4e12-92b1-0caccc864d2a&RID=1
-			$response[$key]['booking'] = url().'/seguros/compra/?'.http_build_query([
-				'GID' => $sessionId,
-				'RID' => $row->id
-			]);
-		**/
-			//  http://viajes-laravel.dev/compra/seguros/?GID=71ff1103-d3c6-4e12-92b1-0caccc864d2a&RID=1
+			//  http://viajes-laravel.dev/compra/seguros/?GID=71ff1103-d3c6-4e12-92b1-0caccc864d2a&BID=1
 			$response[$key]['booking'] = url().'/compra/seguros?'.http_build_query([
 				'GID' => $sessionId,
-				'RID' => $row->id
+				'BID' => $row->id
 			]);
 		}
 		//
@@ -164,52 +293,39 @@ class InsuranceController extends Controller
 			'error'			=> false,
 			'description'	=> 'Ok',
 			'total'			=> sizeof($response),
-			'grid'			=> view('Insurance/Grid')->with([
+			'grid'			=> view('Insurance/grid')->with([
 				'destination'	=> mb_convert_case($search['destination'],MB_CASE_LOWER),
 				'response'		=> $response
 			])->render()
 		],200);
 	}
-
-	//
-	function booking()
-	{
-		$gulliver_sessionId = Request::get('GID',"");
-		$database_id        = Request::get('RID',"");
-		if (""==$gulliver_sessionId) {
-			abort(404);
-		}
-		if (""==$database_id) {
-			abort(404);
-		}
-		//
-		$row = InsuranceModel::where('session', $gulliver_sessionId)->where('id', $database_id)->first()->toArray();
-		$row['search']  = json_decode($row['search'],true);
-		$row['item']    = json_decode($row['item'],true);
-print_pre($row,0,0);
-	}
 /***********************************************************************************************************************
 * FUNCTIONS
 ***********************************************************************************************************************/
-	//
+	/**
+	 * Read and validate variables from the url
+	 * used by results()
+	 * @return array
+	**/
 	static function validateParams()
 	{
+		//
 		$errors = [];
 		$date_min = str_replace('+', 'P', strtoupper(self::$config['mindate']));
 		$date_max = str_replace('+', 'P', strtoupper(self::$config['maxdate']));
-
+		//
 		Request::setMethod('GET');
-
+		//
 		$origin = Request::get('origen',"");
 		if (""==$origin) {
 			$errors[] = 'Debe elegir una ciudad de origen';
 		}
-
+		//
 		$destination = Request::get('destino',"");
 		if (""==$destination) {
 			$errors[] = 'Debe elegir una ciudad de destino';
 		}
-
+		//
 		$dateFrom = Request::get('fecha-desde',"");
 		if ("" == $dateFrom) {
 			$errors[] = 'Debe elegir una fecha inicial para siu seguro';
@@ -225,7 +341,7 @@ print_pre($row,0,0);
 				}
 			}
 		}
-
+		//
 		$dateTo	= Request::get('fecha-hasta',"");
 		if ("" == $dateFrom) {
 			$errors[] = 'Debe elegir una fecha inicial para siu seguro';
@@ -241,30 +357,34 @@ print_pre($row,0,0);
 				}
 			}
 		}
-
+		//
 		$passengers = self::passengersParseUrl();
 		if ([] == $passengers) {
 			$errors[] = 'Debe especificar los pasajeros y sus edades';
 		}
-
 		//
-		$search = [
-			'origin'			=> $origin,
-			'destination'	    => $destination,
-			'dateFrom'			=> $dateFrom,
-			'dateTo'			=> $dateTo,
-			'passengers'		=> $passengers
+		return [
+			'errors' => $errors,
+			'search' => [
+				'origin'			=> $origin,
+				'destination'	    => $destination,
+				'dateFrom'			=> $dateFrom,
+				'dateTo'			=> $dateTo,
+				'passengers'		=> $passengers
+			]
 		];
-		//
-		return ['search'=>$search,'errors'=>$errors];
 	}
 
-	//
+	/**
+	 * Read and prepare passengers from form
+	 * used in search()
+	 * @return bool|string
+	**/
 	static function passengersParseForm()
 	{
-		$passengers		    = Request::get('passengers',0);
-		$ages			    = Request::get('ages',[]);
-		$return     	    = [];
+		$passengers	= Request::get('passengers',0);
+		$ages		= Request::get('ages',[]);
+		$return     = [];
 		if (!$passengers || !sizeof($ages)) {
 			return false;
 		}
@@ -275,12 +395,16 @@ print_pre($row,0,0);
 		return implode('-',$return);
 	}
 
-	//
+	/**
+	 * Read and prepare passengers from url
+	 * used in search()
+	 * @return bool|string
+	**/
 	static function passengersParseUrl()
 	{
-		$passengers		    = Request::get('pasajeros',0);
-		$passengers		    = explode('-',$passengers);
-		$return     	    = [];
+		$passengers = Request::get('pasajeros',0);
+		$passengers	= explode('-',$passengers);
+		$return     = [];
 		if (!sizeof($passengers)) {
 			return false;
 		}

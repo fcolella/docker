@@ -15,14 +15,14 @@ class Main extends Controller
 {
 	function index($params=[])
 	{
-	//	$response = Gulliver::getStates();
-	//	$response = Gulliver::getStates('AR');
-	//	$response = Gulliver::getStates('','B');
+	//	$response = Gulliver::getStatesBooking();
+	//	$response = Gulliver::getStatesBooking('AR');
+	//	$response = Gulliver::getStatesBooking('','B');
 
-	//	$response = Gulliver::getCities();
-	//	$response = Gulliver::getCities('AR');
-	//	$response = Gulliver::getCities('AR','B');
-	//	$response = Gulliver::getCities('','',1333);
+	//	$response = Gulliver::getCitiesBooking();
+	//	$response = Gulliver::getCitiesBooking('AR');
+	//	$response = Gulliver::getCitiesBooking('AR','B');
+	//	$response = Gulliver::getCitiesBooking('','',1333);
 
 	//	$response = Gulliver::getFlightsOffers();
 	//	$response = Gulliver::getFlightsCalendars();

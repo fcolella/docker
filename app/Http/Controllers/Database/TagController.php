@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Models\Tag;
+use App\Http\Models\Tag_items;
+use App\Http\Models\Region;
+use App\Http\Models\Country;
+use App\Http\Models\City;
+use App\Http\Models\Offer_air;
 
 class TagController extends Controller
 {
@@ -16,7 +22,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+		return 	view('cms/tags/all')
+				->with('tags', Tag::all());
     }
 
     /**
@@ -26,7 +33,14 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+		$regions = Region::all();
+		$countries = Country::orderBy('name', 'asc')->get();
+		$offers_air = Offer_air::orderBy('offerId', 'asc')->get();
+
+		return 	view('cms/tags/create')
+				->with('regions', $regions)
+				->with('countries', $countries)
+				->with('offers_air', $offers_air);
     }
 
     /**

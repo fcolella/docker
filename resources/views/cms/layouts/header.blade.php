@@ -22,7 +22,7 @@
 	<script src="{{ asset('statics/cms/js/plugins/gv-scrollup.js') }}"></script>
 	<script>
 		$(document).ready(function(){
-			$(this).addScrollup({scrollImg: "{{ asset('statics/cms/images/scrollup.png') }}"});
+			$(this).addScrollup({scrollSvg: '{!! file_get_contents(asset("statics/cms/images/scrollup.svg")) !!}'});
 		});
 	</script>
 

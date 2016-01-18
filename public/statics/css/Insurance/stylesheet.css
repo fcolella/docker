@@ -41,3 +41,15 @@ form.busqueda h2 {margin:0 0 0 0;cursor:pointer}
 .checklist ol, .checklist ul {margin:0;padding:0}
 .checklist li {list-style: outside none none}
 .checklist ul li {background:rgba(0, 0, 0, 0) url("../../images/master-sprite.png") no-repeat scroll 0 0;background-position:-940px -215px;line-height:18px;padding-bottom:8px;padding-left:27px}
+
+/** landing Zones **/
+body.insurance-results .widget-busqueda-wrap {position:initial}
+.mini-blok {padding-left:0;padding-right:10px}
+.mini-blok .int {background-color:#ededed;padding:10px;}
+.mini-blok h3 {font-size:12px;border-bottom:1px dotted #b4b4b4;margin:0 0 10px;padding:0 0 2px}
+.mini-blok .precio {color:#0793d2;font-size:20px;font-weight:bold;line-height:20px;margin:0;float:right}
+.mini-blok .izq {float:left}
+.mini-blok .reservar_btn {background-color:#0793d2;border-radius:3px;color:white;cursor:pointer;font-size:14px;height:auto;margin-top:10px;padding:2px 15px 3px;text-align:center;text-shadow:0 2px 3px #666;float:right}
+.innerBar {background-color:#126799;color:#ffffff;float:left;margin:10px 0;padding:5px;width:100%}
+.resultsTable table {border-collapse:separate;border-spacing:5px 0;color:#3c3c3b;font-family:Arial,sans-serif;font-size:11px}
+.resultsTable td {height:auto;margin:0;padding:5px;text-align:center;width:25%}
