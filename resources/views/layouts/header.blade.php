@@ -10,12 +10,12 @@
 
 	<title>Starter Template for Bootstrap</title>
 
-	@foreach ($Commons::getCss() as $css)
-	{!! $css !!}
+	@foreach ($cssTags as $item)
+	{!! $item !!}
 	@endforeach
 
-	@foreach ($Commons::getJsHeader() as $js)
-	{!! $js !!}
+	@foreach ($jsHeader as $item)
+	{!! $item !!}
 	@endforeach
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -25,5 +25,6 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="{{ $route }}">
     @include('layouts.header-navbar')
+    @yield('navbar')

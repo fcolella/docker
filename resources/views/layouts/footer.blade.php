@@ -1,7 +1,9 @@
-	@include('layouts.footer-links')
 
-	@foreach ($Commons::getJsFooter() as $js)
-	{!! $js !!}
+	@include('layouts.footer-links')
+	@yield('footer-links')
+
+	@foreach ($jsFooter as $item)
+	{!! $item !!}
 	@endforeach
 
   </body>

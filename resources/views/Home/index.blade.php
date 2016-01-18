@@ -1,6 +1,6 @@
-@inject('Commons','App\Http\Controllers\Commons')
-@include('layouts.header')
+@extends('layouts.master')
 
+@section('main')
 @if (!empty($SearchBoxes))
 	<div class="widget-slider-wrap">
 		<div class="container">
@@ -8,6 +8,7 @@
 				<div class="col-md-5 container-widget-busqueda">
 					<div class="widget-busqueda-wrap">
 						<ul class="nav nav-tabs" role="tablist" id="widget-busqueda">
+<?php /**
 							@foreach ($SearchBoxes as $item)
 							@if (empty($item['html'])) @continue; @endif
 							<li role="presentation" @if ($item == head($SearchBoxes)) class="active" @endif><a href="#{{ $item['name'] }}" title="{{ $item['title'] }}" aria-controls="{{ $item['name'] }}" role="tab" data-toggle="tab" aria-expanded="@if ($item == head($SearchBoxes)) true @else false @endif">{{ $item['name'] }}</a></li>
@@ -21,6 +22,7 @@
                        		</div>
                        		@endforeach
                        	</div>
+**/ ?>
 					</div>
 				</div>
 			</div>
@@ -45,4 +47,4 @@
 	</div>
 </div>
 
-@include('layouts.footer')
+@stop

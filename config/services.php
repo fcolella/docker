@@ -35,9 +35,17 @@ return [
 		'secret' => env('STRIPE_SECRET'),
 	],
 
-	'gulliver' => [
+	'gulliver'      => [
 		//	environment fallback to production
-		'host'  => env('GULLIVER_HOST', 'http://186.153.135.1428080'),
-		'port'  => env('GULLIVER_PORT', '9000')
+		'host'      => env('GULLIVER_HOST', 'http://186.153.135.1428080'),
+		'port'      => env('GULLIVER_PORT', '9000')
+	],
+
+	'pagos-online'  => [
+		'url'       => env('URL_DINAMICA_PAGOS', 'http://www.garbarinoviajes.com.ar/pago-online/op_ok.php')
+	],
+
+	'decidir'       => [
+		'url'       => env('URL_DECIDIR','https://sps.decidir.com/sps-ar/Validar')
 	]
 ];

@@ -1,0 +1,97 @@
+
+2 Pasajeros             ARS 1.555
+Impuestos y gastos      ARS 65
+
+Total                   ARS 1.620
+
+/////////////////////////////////////////////////
+
+2 Pasajeros             ARS 1.555
+Impuestos y gastos      ARS 65
+Gastos financieros      ARS 486.00
+Bonificación promoción  ARS -243.00
+
+Total                   ARS 1,863.00
+
+/////////////////////////////////////////////////
+
+Array
+(
+    [TotalAmount] => 1619.83
+    [selectedBank] => Banco
+    [data-pago] => Array
+        (
+            [tarjeta] => 1
+            [sps] => 00180412
+            [cuotas] => 12
+            [banco] => 2
+        )
+
+    [precioFinal] => 1863
+    [intereses] => 486
+    [bonificacion] => 243
+    [maxCargosGestion] => 0
+    [descCargosGestion] => 0
+    [coefDescuento] => 0
+    [Installment] => 0
+    [banco] => 2
+    [card] => SeleccionÃ¡ una tarjeta
+    [traveler] => Array
+        (
+            [0] => Array
+                (
+                    [nombre] => Test 1
+                    [apellido] => Pasajero 1
+                    [dia_nac] => 1
+                    [mes_nac] => 1
+                    [anio_nac] => 1970
+                    [tipoDocumento] => DNI
+                    [numeroDocumento] => 1234567891
+                )
+
+            [1] => Array
+                (
+                    [nombre] => Test 2
+                    [apellido] => Pasajero 2
+                    [dia_nac] => 2
+                    [mes_nac] => 2
+                    [anio_nac] => 1972
+                    [tipoDocumento] => DNI
+                    [numeroDocumento] => 1234567892
+                )
+
+        )
+
+    [emergencyContactsInfo] => Array
+        (
+            [name] => Test
+            [lastname] => Emergencia
+            [phone] => 4787-7077
+        )
+
+    [provincia] => C
+    [stateName] => Ciudad de Buenos Aires
+    [localidad] => Buenos Aires
+    [matchedCity] => 1
+    [localityCode] => 20000
+    [subdivision] => Buenos Aires
+    [zipCode] => C1000
+    [domicilio] => Av. Cabildo
+    [altura] => 2025
+    [piso] => 1
+    [depto] => Al fondo
+    [clave] => CUIL
+    [cuil] => 23123456789
+    [email] => it@garbarinoviajes.com.ar
+    [telefono] => 4787-7077
+    [comentarios] => PRUEBA DESDE DESARROLLO
+    [condiciones] => on
+    [GID] => e4e39335-f981-4289-affb-149650b6ea2a
+    [RID] => 76
+    [tester] => tester
+    [ownCredit] => 0
+)
+
+Called from the file: /Users/gabrielvazquez/Sites/viajes/app/Http/Controllers/Booking/InsuranceController.php, Line: 228
+
+End.

@@ -12,6 +12,7 @@
 */
 
 
+/**  CMS  **/
 Route::group(['prefix' => 'cms'], function()
 {
     Route::get('/', ['as' => 'cms.index', 'uses' => 'Cms\Main@index']);
@@ -60,43 +61,36 @@ Route::group(['prefix' => 'cms'], function()
 	});
 });
 
-Route::get('/','Home\Main@index');
-
-Route::group(['prefix' => 'cities'], function()
+/**  BOOKING  **/
+Route::group(['prefix' => 'compra'], function()
 {
-	Route::get('/', ['as' => 'cities-booking.index', 'uses' => 'Database\CityBookingController@index']);
-	Route::get('/fetch', ['as' => 'cities-booking.fetch', 'uses' => 'Database\CityBookingController@fetch']);
-	Route::get('/query/{query}', ['as' => 'cities-booking.query', 'uses' => 'Database\CityBookingController@query']);
+	//  Ajax
+	Route::get('CitiesAutocomplete', 'Booking\BookingController@CitiesAutocomplete');
+	//  Calculate Installments
+	Route::get('calculations', 'Booking\BookingController@Calculations');
+	//  http://viajes-laravel.dev/compra/seguros?GID=230b653f-a05a-4278-9148-ea9f30f437df&BID=34
+	Route::get('seguros', 'Booking\InsuranceController@Index');
+	//  form submit
+	Route::post('seguros', 'Booking\InsuranceController@Submit');
 });
 
-Route::get('/{landing?}/{name?}', 'Landing\Landing@index')->where(['landing'=>'[A-Za-z]+', 'name'=>'[A-Za-z]+']);
+/**  WEB HOME  **/
+Route::get('/',['as' => 'home', 'uses' => 'Home\Main@index']);
 
-
-
-/**
-//  https://ajgallego.gitbooks.io/laravel-5/content/capitulo_2_rutas_avanzadas.html
-Route::group(['prefix' => 'api/offers'], function()
+/**  WEB INSURANCE  **/
+Route::group(['prefix' => 'seguros'], function()
 {
-    //
-    Route::get('hotels/{format?}', function($format='json') {
-        //
-        $name = Request::query('name','lalala');
-        $response = ['name' => $name,'location' => __FILE__.':'.__LINE__, 'api' => 'offers', 'product' => 'hotels', 'format' => $format, 'status' => true, 'offers' => [ [],[],[],[],[],[] ] ];
-        if ('json'===$format) {
-            return Response::json($response);
-        } else {
-            print_r($response);die;
-        }
-    });
-    //
-    Route::get('flight/{format?}', function($format='json') {
-        $name = Request::query('name','lalala');
-        $response = ['name' => $name,'location' => __FILE__.':'.__LINE__, 'api' => 'offers', 'product' => 'flight', 'format' => $format, 'status' => true, 'offers' => [ [],[],[],[],[],[] ] ];
-        if ('json'===$format) {
-            return Response::json($response);
-        } else {
-            print_r($response);die;
-        }
-    });
+	//  Index
+    Route::get('/', 'Insurance\InsuranceController@index');
+	//  landing zones
+    Route::get('zonas', 'Insurance\InsuranceController@zones');
+	//  Search Form submit
+    Route::post('search', 'Insurance\InsuranceController@search');
+	//  Results
+    Route::get('listado-{slug?}', 'Insurance\InsuranceController@results');
+	//  Grid
+    Route::post('grilla', 'Insurance\InsuranceController@grid');
 });
-**/
+
+/** WEB LANDINGS **/
+//Route::get('/{landing?}/{name?}', 'Landing\LandingController@index')->where(['landing'=>'[A-Za-z]+', 'name'=>'[A-Za-z]+']);

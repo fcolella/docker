@@ -1,4 +1,4 @@
-
+@section('footer-links')
 <footer class="main-footer">
 	<div class="container">
 		@if (!empty($FooterLinks))
@@ -92,4 +92,4 @@
         </aside>
     </div>
 </footer>
-
+@endsection
